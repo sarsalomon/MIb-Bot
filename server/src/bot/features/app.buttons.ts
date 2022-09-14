@@ -111,7 +111,7 @@ export function setWhenYear() {
 
 export function setWhenYearReception() {
     return Markup.inlineKeyboard([
-        Markup.button.callback('2022 Reception uchun', '2022SendReception'),
+        Markup.button.callback('2022', '2022SendReception'),
     ], {
         columns:2
     })

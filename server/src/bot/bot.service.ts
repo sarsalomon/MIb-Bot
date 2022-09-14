@@ -6,6 +6,7 @@ import { Appel } from 'src/appel/appel.model';
 import { Reception } from 'src/reception/reception.model';
 import { District } from 'src/district/district.model';
 import { User } from 'src/users/users.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class BotService {
@@ -21,6 +22,26 @@ export class BotService {
         @InjectModel(User) 
         private userRepository: typeof User
     ) {}
+
+    async doneAppelOrReception(text:string, id: number, status: string) {
+        console.log(text)
+        console.log(id)
+        if (text == "Xabar") {
+            const appel = await this.appelRepository.update({status: 1}, {where: {id: id}});
+            if (appel) {
+                return appel;
+            } else {
+                return null;
+            }
+        } else if (text == "Murojat") {
+            const reception = await this.receptionRepository.update({status: 1}, {where: {id: id}});
+            if (reception) {
+                return reception;
+            } else {
+                return null;
+            }
+        }
+    }
 
     async checkMibHumans(text: string, chatId: number) {
 
@@ -86,9 +107,22 @@ export class BotService {
 
     async createAppel(chatId: number, passport: string, phone: string, description: string, districtId: number, status: number) {
 
-        const condidate = await this.appelRepository.findOne({where: {chatId, status: 0}, include: {all: true}})
+        const condidate = await this.appelRepository.findOne({where: {chatId, status: 0}, order:[['id', 'DESC']], include: {all: true}})
+        console.log(condidate)
         if (condidate) {
-            return null;
+            if (condidate.passport == '' || condidate.passport == null 
+            || condidate.phone == '' || condidate.phone == null 
+            || condidate.description == '' || condidate.description == null ) {
+                const condidateDelete = await this.appelRepository.destroy({where: {id: condidate.id}})
+
+                if (condidateDelete){
+                    return condidateDelete;
+                } else {
+                    return null;                
+                }
+            } else {
+                return null;        
+            }
             // throw new HttpException('Xatolik', HttpStatus.BAD_REQUEST);
         } else {
             const appel = await this.appelRepository.create({chatId: chatId, passport: '', phone: '', description: '', districtId: 0, status: 0});
@@ -155,9 +189,9 @@ export class BotService {
 
         if (condidate) {
             const setdescription = await this.appelRepository.update({description: description}, {where: {chatId,  status: 0}});
-            console.log(setdescription)
             if (setdescription) {
                 const findeAppel = await this.appelRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
+                const Id          = findeAppel.id || 0;
                 const Passport    = findeAppel.passport || 0;
                 const Phone       = findeAppel.phone || 0;
                 const Description = findeAppel.description || 0;
@@ -171,6 +205,7 @@ export class BotService {
                         const DirectorChatId = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
+                            id: Id,
                             passport: Passport,
                             phone: Phone,
                             description: Description,
@@ -201,7 +236,18 @@ export class BotService {
         const condidate = await this.receptionRepository.findOne({where: {chatId, status: 0}, include: {all: true}});
 
         if (condidate) {
-            return null;
+            if (condidate.passport == '' || condidate.passport == null 
+            || condidate.phone == '' || condidate.phone == null 
+            || condidate.description == '' || condidate.description == null ) {
+                const condidateDelete = await this.receptionRepository.destroy({where: {id: condidate.id}})
+                if (condidateDelete){
+                    return condidateDelete;
+                } else {
+                    return null;                
+                }
+            } else {
+                return null;                
+            }
             // throw new HttpException('Xatolik', HttpStatus.BAD_REQUEST);
         } else {
             const reception = await this.receptionRepository.create({chatId: chatId, passport: '', phone: '', description: '', districtId: 0, status: 0});
@@ -243,9 +289,9 @@ export class BotService {
 
         if (condidate) {
             const setdescription = await this.receptionRepository.update({description: description}, {where: {chatId,  status: 0}});
-            console.log(setdescription)
             if (setdescription) {
                 const findeReception = await this.receptionRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
+                const Id          = findeReception.id || 0;
                 const Passport    = findeReception.passport || 0;
                 const Phone       = findeReception.phone || 0;
                 const Description = findeReception.description || 0;
@@ -259,6 +305,7 @@ export class BotService {
                         const DirectorChatId = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
+                            id: Id,
                             passport: Passport,
                             phone: Phone,
                             description: Description,
@@ -285,15 +332,28 @@ export class BotService {
     }
 
     async getHisobat(which: number, district:string, month: number, year: number) {
+        let today = new Date();
+        let newmonth = today.getMonth()+1;
+        let day = today.getDate();
+        let startedDate;
+        let endDate;
+
+        if (month == 0) {
+            startedDate = new Date(`${year}-${newmonth}-${day} 00:00:00`);
+            endDate = new Date(`${year}-${newmonth}-31 00:00:00`);
+        } else {
+            startedDate = new Date(`${year}-${month}-01 00:00:00`);
+            endDate = new Date(`${year}-${month}-31 00:00:00`);
+        }
 
         if (which == 1) {
 
-            const CountAppel = await this.appelRepository.count({where: {districtId: district}, include: {all: true}});
+            const CountAppel = await this.appelRepository.count({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}} , include: {all: true}, });
             return CountAppel;
 
         } else if (which == 2) {
 
-            const CountReception = await this.receptionRepository.count({where: {districtId: district}, include: {all: true}});
+            const CountReception = await this.receptionRepository.count({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}}, include: {all: true}});
             return CountReception;
 
         }

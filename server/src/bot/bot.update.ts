@@ -1,3 +1,4 @@
+import { isNumber } from 'class-validator';
 import { InjectBot, Start, Update, Action, On, Message, Ctx, Hears } from 'nestjs-telegraf';
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
@@ -1586,7 +1587,7 @@ export class BotUpdate {
 
     @Action('BugunSend')
     async sendMonthB(ctx: Context) {
-        ctx.session.month = 'Bugun';
+        ctx.session.month = '0';
 
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
@@ -1744,6 +1745,7 @@ export class BotUpdate {
     // Hisobat Year
     @Action('2022Send')
     async sendMonth2022(ctx: Context) {
+        ctx.session.year = "2022";
 
         const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
@@ -1770,6 +1772,7 @@ export class BotUpdate {
 
     @Action('2022SendReception')
     async sendMonthReception2022(ctx: Context) {
+        ctx.session.year = "2022";
 
         const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
@@ -1797,7 +1800,6 @@ export class BotUpdate {
 
     @Action('AppelSend')
     async sendAppelOrReception1(ctx: Context) {
-        console.log(ctx.session.type)
         ctx.session.type = 'sendAppelOrReceptionHisobat';
         ctx.session.whichAppelOrReception = '1';
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons());
@@ -1827,7 +1829,7 @@ export class BotUpdate {
             ctx.session.type = 'SendMessage';
             await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
         } else {
-            await ctx.replyWithHTML("Sizni xabar jarayonda");
+            await ctx.replyWithHTML("Sizni xabar jarayonda ⌛️");
         }
     }
 
@@ -1839,7 +1841,7 @@ export class BotUpdate {
             ctx.session.type = 'SendReception';
             await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
         } else {
-            await ctx.replyWithHTML("Sizni xabar jarayonda")
+            await ctx.replyWithHTML("Sizni xabar jarayonda ⌛️")
         }
     }
 
@@ -1888,7 +1890,20 @@ export class BotUpdate {
     async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].text;
-        console.log(chatId)
+
+        const appel = text.split(' ')[0];
+        const id = text.split(' ')[1];
+        const state = text.split(' ')[2];
+
+        if (appel != undefined && id != undefined && state != undefined) {
+            const done = await this.botService.doneAppelOrReception(appel, Number(id), state);
+            if (done) {
+                await ctx.replyWithHTML("Yangilandi ✅");
+            } else {
+                await ctx.replyWithHTML("Tizimda xatolik ❌");
+            }
+        }
+
         if (text == 'Hisobat') {
             ctx.session.type = 'sendHisobat';
             await ctx.replyWithHTML("Tanlang", setAppelOrReception());
@@ -1940,7 +1955,7 @@ export class BotUpdate {
             const appel = await this.botService.setDescription(Number(chatId), text);
             if (appel) {
 
-                const content = `${appel.passport}\n${appel.phone}\n${appel.description}\n${appel.date}`;
+                const content = `${appel.id}\n${appel.passport}\n${appel.phone}\n${appel.description}\n${appel.date}`;
 
                 if (appel.userChatId > 0) {
                     await ctx.telegram.sendMessage(appel.userChatId, content);
@@ -1987,7 +2002,7 @@ export class BotUpdate {
             const reception = await this.botService.setDescriptionReception(Number(chatId), text); 
 
             if (reception) {
-                const content = `${reception.passport}\n${reception.phone}\n${reception.description}\n${reception.date}`;
+                const content = `${reception.id}\n${reception.passport}\n${reception.phone}\n${reception.description}\n${reception.date}`;
 
                 if (reception.userChatId > 0) {
                     await ctx.telegram.sendMessage(reception.userChatId, content);
