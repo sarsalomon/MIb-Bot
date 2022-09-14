@@ -158,9 +158,10 @@ export class BotService {
             console.log(setdescription)
             if (setdescription) {
                 const findeAppel = await this.appelRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
-                const Passport    = findeAppel.passport;
-                const Phone       = findeAppel.phone;
-                const Description = findeAppel.description;
+                const Passport    = findeAppel.passport || 0;
+                const Phone       = findeAppel.phone || 0;
+                const Description = findeAppel.description || 0;
+                const Date        = findeAppel.createdAt || 0;
                 if (findeAppel) {
                     const findUser = await this.userRepository.findOne({where: {districtId: findeAppel.districtId}, order:[['id', 'DESC']], include: {all: true}});
                     const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
@@ -176,7 +177,7 @@ export class BotService {
                             userChatId: UserChatId,
                             directorChatId: DirectorChatId,
                             kansilyariyaChatId: KansilyariyaChatId,
-
+                            date: Date
                         }
                         return obj;
                     } else {
@@ -242,9 +243,59 @@ export class BotService {
 
         if (condidate) {
             const setdescription = await this.receptionRepository.update({description: description}, {where: {chatId,  status: 0}});
-            return setdescription;
+            console.log(setdescription)
+            if (setdescription) {
+                const findeReception = await this.receptionRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
+                const Passport    = findeReception.passport || 0;
+                const Phone       = findeReception.phone || 0;
+                const Description = findeReception.description || 0;
+                const Date        = findeReception.createdAt || 0;
+                if (findeReception) {
+                    const findUser = await this.userRepository.findOne({where: {districtId: findeReception.districtId}, order:[['id', 'DESC']], include: {all: true}});
+                    const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
+                    const findKansilyariya = await this.userRepository.findOne({where: {role: "Kansilyariya"}, order:[['id', 'DESC']], include: {all: true}});
+                    if (findUser) {
+                        const UserChatId = findUser.chatId;
+                        const DirectorChatId = findDirector.chatId || 0;
+                        const KansilyariyaChatId = findKansilyariya.chatId || 0;
+                        const obj = {
+                            passport: Passport,
+                            phone: Phone,
+                            description: Description,
+                            userChatId: UserChatId,
+                            directorChatId: DirectorChatId,
+                            kansilyariyaChatId: KansilyariyaChatId,
+                            date: Date
+                        }
+                        return obj;
+                    } else {
+                        return null;
+                    }
+                } else {
+
+                }
+            } else {
+                return null;
+            }
+
         } else {
             return null;
+        }
+
+    }
+
+    async getHisobat(which: number, district:string, month: number, year: number) {
+
+        if (which == 1) {
+
+            const CountAppel = await this.appelRepository.count({where: {districtId: district}, include: {all: true}});
+            return CountAppel;
+
+        } else if (which == 2) {
+
+            const CountReception = await this.receptionRepository.count({where: {districtId: district}, include: {all: true}});
+            return CountReception;
+
         }
 
     }

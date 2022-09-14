@@ -25,7 +25,8 @@ const sessions = new LocalSession({database: 'session_db.json'});
     TelegrafModule.forRoot({
       middlewares: [sessions.middleware()],
       token: '5602819996:AAG5SO6HPjjedQDumhLS7XBuTt0tK4V-Ak8'
-    }), 
+    }),
+    
     AppelModule,
     ReceptionModule,
     UsersModule

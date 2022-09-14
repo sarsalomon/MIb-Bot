@@ -1,7 +1,7 @@
 import { InjectBot, Start, Update, Action, On, Message, Ctx, Hears } from 'nestjs-telegraf';
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
-import { actionButtons, districtSendButtons, districtSendButtonsAppel, langButtons, sendPhone } from './features/app.buttons';
+import { actionButtons, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
 import { Context } from './features/context.interface';
 
 @Update()
@@ -137,6 +137,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '1';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '1';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
 
     }
@@ -178,6 +204,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '2';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '2';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -226,6 +278,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '3';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '3';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -266,6 +344,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '4';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '4';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -314,6 +418,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '5';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '5';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -354,6 +484,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '6';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '6';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -402,6 +558,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '7';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '7';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -442,6 +624,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '8';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '8';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -495,6 +703,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '9';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '9';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -535,6 +769,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '10';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '10';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -583,6 +843,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '11';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '11';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -623,6 +909,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '12';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '12';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -671,6 +983,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '13';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '13';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -711,6 +1049,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '14';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '14';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -759,6 +1123,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '15';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '15';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -799,6 +1189,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '16';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '16';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -847,6 +1263,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '17';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '17';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -887,6 +1329,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '18';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '18';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -935,6 +1403,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '19';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '19';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -975,6 +1469,32 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '20';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '21';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
@@ -1023,6 +1543,32 @@ export class BotUpdate {
                 await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
             }
 
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '22';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '22';
+                await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+            }
+
         }
     }
 
@@ -1035,6 +1581,235 @@ export class BotUpdate {
     async sendToMain(ctx: Context) {
         await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
     }
+
+    // Hisobat
+
+    @Action('BugunSend')
+    async sendMonthB(ctx: Context) {
+        ctx.session.month = 'Bugun';
+
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('YanvarSend')
+    async sendMonthY(ctx: Context) {
+        ctx.session.month = '01';
+
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+
+    }
+
+    @Action('FevralSend')
+    async sendMonthF(ctx: Context) {
+        ctx.session.month = '02';
+
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('MartSend')
+    async sendMonthM(ctx: Context) {
+        ctx.session.month = '03';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('AprelSend')
+    async sendMonthA(ctx: Context) {
+        ctx.session.month = '04';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+    
+    @Action('MaySend')
+    async sendMonthMa(ctx: Context) {
+        ctx.session.month = '05';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+    
+    @Action('IyunSend')
+    async sendMonthI(ctx: Context) {
+        ctx.session.month = '06';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+    
+    @Action('IyulSend')
+    async sendMonthIy(ctx: Context) {
+        ctx.session.month = '07';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('AvgustSend')
+    async sendMonthAv(ctx: Context) {
+        ctx.session.month = '08';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+    
+    @Action('SentyabrSend')
+    async sendMonthS(ctx: Context) {
+        ctx.session.month = '09';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+    
+    @Action('OktyabrSend')
+    async sendMonthO(ctx: Context) {
+        ctx.session.month = '10';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('NoyabrSend')
+    async sendMonthN(ctx: Context) {
+        ctx.session.month = '11';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    @Action('DekabrSend')
+    async sendMonthD(ctx: Context) {
+        ctx.session.month = '12';
+        
+        if(ctx.session.whichAppelOrReception == "1") {
+            await ctx.editMessageText("Yilni tanlang", setWhenYear());
+
+        } else if (ctx.session.whichAppelOrReception == '2') {
+            await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
+        }
+    }
+
+    // Hisobat Year
+    @Action('2022Send')
+    async sendMonth2022(ctx: Context) {
+
+        const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
+
+        if (getHisobat>0) {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML(`${getHisobat}`, actionButtons());
+        } else if (getHisobat==0) {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons());
+        } else {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+        }
+    }
+
+    @Action('2022SendReception')
+    async sendMonthReception2022(ctx: Context) {
+
+        const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
+
+        if (getHisobat>0) {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML(`${getHisobat}`, actionButtons());
+        } else if (getHisobat==0) {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons());
+        } else {
+            ctx.session.district = ''
+            ctx.session.whichAppelOrReception = ''
+            ctx.session.month = ''
+            ctx.session.year = ''
+            await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+        }
+    }
+    //
+
+    @Action('AppelSend')
+    async sendAppelOrReception1(ctx: Context) {
+        console.log(ctx.session.type)
+        ctx.session.type = 'sendAppelOrReceptionHisobat';
+        ctx.session.whichAppelOrReception = '1';
+        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons());
+    }
+
+    @Action('ReceptionSend')
+    async sendAppelOrReception2(ctx: Context) {
+        ctx.session.type = 'sendReceptionOrAppelHisobat';
+        ctx.session.whichAppelOrReception = '2';
+        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons());
+    }
+
 
     // executive Documents
 
@@ -1050,7 +1825,7 @@ export class BotUpdate {
         const appel = await this.botService.createAppel(Number(chatId), '', '', '', 0,  0);
         if (appel) {
             ctx.session.type = 'SendMessage';
-            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtonsAppel());
+            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
         } else {
             await ctx.replyWithHTML("Sizni xabar jarayonda");
         }
@@ -1062,7 +1837,7 @@ export class BotUpdate {
         const reception = await this.botService.createRepection(Number(chatId), '', '', '', 0,  0);
         if (reception) {
             ctx.session.type = 'SendReception';
-            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtonsAppel());
+            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
         } else {
             await ctx.replyWithHTML("Sizni xabar jarayonda")
         }
@@ -1072,7 +1847,7 @@ export class BotUpdate {
     async getPhoneForCheck(ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].contact.phone_number;
-        console.log(ctx.session.type)
+
         if (ctx.session.type == '') {
     
             const users = await this.botService.checkMibHumans(text, chatId);
@@ -1082,6 +1857,7 @@ export class BotUpdate {
             } else {
                 await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
             }
+
         } else if (ctx.session.type == 'SendPhone') {
 
             const appel = await this.botService.setPhone(Number(chatId), text)
@@ -1112,7 +1888,12 @@ export class BotUpdate {
     async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].text;
-        
+        console.log(chatId)
+        if (text == 'Hisobat') {
+            ctx.session.type = 'sendHisobat';
+            await ctx.replyWithHTML("Tanlang", setAppelOrReception());
+        }
+
         const users = await this.botService.checkMibHumans(text, chatId);
         
         if (users) {
@@ -1157,10 +1938,23 @@ export class BotUpdate {
         } else if (ctx.session.type === 'SendDescription') {
 
             const appel = await this.botService.setDescription(Number(chatId), text);
-            console.log(appel)
             if (appel) {
-                ctx.session.type = 'Done';
 
+                const content = `${appel.passport}\n${appel.phone}\n${appel.description}\n${appel.date}`;
+
+                if (appel.userChatId > 0) {
+                    await ctx.telegram.sendMessage(appel.userChatId, content);
+                }
+
+                if (appel.directorChatId > 0) {
+                    await ctx.telegram.sendMessage(appel.directorChatId, content);
+                }
+
+                if (appel.kansilyariyaChatId > 0) {
+                    await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content);
+                }
+
+                ctx.session.type = 'Done';
                 await ctx.replyWithHTML("Rahmat siz bilan tez orada mas'ul xodim bog'lanadi");
                 await ctx.replyWithHTML("MIB xizmatlarini tanlang", actionButtons());
             } else {
@@ -1193,6 +1987,19 @@ export class BotUpdate {
             const reception = await this.botService.setDescriptionReception(Number(chatId), text); 
 
             if (reception) {
+                const content = `${reception.passport}\n${reception.phone}\n${reception.description}\n${reception.date}`;
+
+                if (reception.userChatId > 0) {
+                    await ctx.telegram.sendMessage(reception.userChatId, content);
+                }
+
+                if (reception.directorChatId > 0) {
+                    await ctx.telegram.sendMessage(reception.directorChatId, content);
+                }
+
+                if (reception.kansilyariyaChatId > 0) {
+                    await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content);
+                }
                 ctx.session.type = 'DoneReception';
                 await ctx.replyWithHTML("Rahmat siz bilan tez orada mas'ul xodim bog'lanadi");
                 await ctx.replyWithHTML("MIB xizmatlarini tanlang", actionButtons());
@@ -1200,14 +2007,10 @@ export class BotUpdate {
                 await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
             }
 
-        } 
+        }
 
     }
 
 
-    async SendMessageToMibHumas (chatId: number, text: string) {
-        console.log('dakwjdkawjdk')
-
-    }
 
 }

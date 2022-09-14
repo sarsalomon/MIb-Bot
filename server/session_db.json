@@ -4,7 +4,11 @@
       "id": "5612626311:5612626311",
       "data": {
         "__scenes": {},
-        "type": "Done"
+        "type": "Done",
+        "whichAppelOrReception": "",
+        "district": "",
+        "month": "",
+        "year": ""
       }
     },
     {
