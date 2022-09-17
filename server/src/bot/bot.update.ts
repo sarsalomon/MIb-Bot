@@ -1817,13 +1817,13 @@ export class BotUpdate {
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
     }
 
-
     // executive Documents
 
     @Action('executiveDocuments')
     async sendExecutiveDocuments(ctx: Context) {
         await ctx.editMessageText(ctx.i18n.t("soonText"), actionButtons(ctx));
     }
+
     // Appeal
 
     @Action('sendMessage')
@@ -1914,12 +1914,16 @@ export class BotUpdate {
             await ctx.replyWithHTML("Tanlang", setAppelOrReception());
         }
 
-        const users = await this.botService.checkMibHumans(text, chatId);
+        if(text.length == 13) {
+
+            const users = await this.botService.checkMibHumans(text, chatId);
         
-        if (users) {
-            await ctx.reply("Registratsiyani yakunlash uchun iltimos pasdagi tugmani bosing", Markup.keyboard([
-                Markup.button.contactRequest('Telefon yuborish 📲')
-            ]).oneTime().resize());
+            if (users) {
+                await ctx.reply("Registratsiyani yakunlash uchun iltimos pasdagi tugmani bosing", Markup.keyboard([
+                    Markup.button.contactRequest('Telefon yuborish 📲')
+                ]).oneTime().resize());
+            }
+    
         }
 
         if (!ctx.session.type) return

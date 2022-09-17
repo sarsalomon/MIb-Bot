@@ -24,8 +24,6 @@ export class BotService {
     ) {}
 
     async doneAppelOrReception(text:string, id: number, status: string) {
-        console.log(text)
-        console.log(id)
         if (text == "Xabar") {
             const appel = await this.appelRepository.update({status: 1}, {where: {id: id}});
             if (appel) {
@@ -107,13 +105,13 @@ export class BotService {
 
     async createAppel(chatId: number, passport: string, phone: string, description: string, districtId: number, status: number) {
 
-        const condidate = await this.appelRepository.findOne({where: {chatId, status: 0}, order:[['id', 'DESC']], include: {all: true}})
-        console.log(condidate)
+        const condidate = await this.appelRepository.findOne({where: {chatId, status: 0}, order:[['id', 'DESC']], include: {all: true}});
+
         if (condidate) {
-            if (condidate.passport == '' || condidate.passport == null 
-            || condidate.phone == '' || condidate.phone == null 
+            if (condidate.passport == '' || condidate.passport == null
+            || condidate.phone == '' || condidate.phone == null
             || condidate.description == '' || condidate.description == null ) {
-                const condidateDelete = await this.appelRepository.destroy({where: {id: condidate.id}})
+                const condidateDelete = await this.appelRepository.destroy({where: {id: condidate.id}});
 
                 if (condidateDelete){
                     return condidateDelete;
@@ -123,7 +121,7 @@ export class BotService {
             } else {
                 return null;        
             }
-            // throw new HttpException('Xatolik', HttpStatus.BAD_REQUEST);
+
         } else {
             const appel = await this.appelRepository.create({chatId: chatId, passport: '', phone: '', description: '', districtId: 0, status: 0});
             return appel;
@@ -227,7 +225,7 @@ export class BotService {
             } else {
                 return null;
             }
-            // return setdescription;
+
         } else {
             return null;
         }
@@ -242,7 +240,7 @@ export class BotService {
             if (condidate.passport == '' || condidate.passport == null 
             || condidate.phone == '' || condidate.phone == null 
             || condidate.description == '' || condidate.description == null ) {
-                const condidateDelete = await this.receptionRepository.destroy({where: {id: condidate.id}})
+                const condidateDelete = await this.receptionRepository.destroy({where: {id: condidate.id}});
                 if (condidateDelete){
                     return condidateDelete;
                 } else {
