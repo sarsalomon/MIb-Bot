@@ -21,6 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@grammyjs/i18n": "^0.5.1",
+    "@grammyjs/nestjs": "^0.3.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",

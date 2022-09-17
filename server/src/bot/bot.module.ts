@@ -13,20 +13,35 @@ import { ReceptionModule } from 'src/reception/reception.module';
 import { Reception } from 'src/reception/reception.model';
 import { UsersModule } from 'src/users/users.module';
 import { User } from 'src/users/users.model';
+import { ConfigModule } from '@nestjs/config';
+import { I18n, pluralize } from '@grammyjs/i18n';
+import * as path from 'path';
+import { NestjsGrammyModule } from '@grammyjs/nestjs'
 
 const sessions = new LocalSession({database: 'session_db.json'});
+
+export const i18n = new I18n({
+	directory: path.resolve(__dirname, '..', '..', '\src\\bot\\features\\locales'),
+	defaultLanguage: 'uz',
+	sessionName: 'session',
+	useSession: true,
+})
+
+console.log(i18n)
+
 
 @Module({
   controllers: [BotController],
   providers: [BotService, BotUpdate],
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env'
+  }),
     SequelizeModule.forFeature([TelegramMembers, Appel, District, Reception, User]),
-    // forwardRef(() => AppModule),
-    TelegrafModule.forRoot({
-      middlewares: [sessions.middleware()],
-      token: '5602819996:AAG5SO6HPjjedQDumhLS7XBuTt0tK4V-Ak8'
+    TelegrafModule .forRoot({
+      middlewares: [sessions.middleware(), i18n.middleware()],
+      token: process.env.TELEGRAM
     }),
-    
     AppelModule,
     ReceptionModule,
     UsersModule

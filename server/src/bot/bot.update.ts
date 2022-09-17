@@ -1,4 +1,3 @@
-import { isNumber } from 'class-validator';
 import { InjectBot, Start, Update, Action, On, Message, Ctx, Hears } from 'nestjs-telegraf';
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
@@ -24,7 +23,7 @@ export class BotUpdate {
         if (!condidate.lang) {
             await ctx.replyWithHTML("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         } else {
-            await ctx.replyWithHTML("Sizni yana ko'rganimdan xursandaman \nMIB xizmatlarini tanlang", actionButtons());    
+            await ctx.replyWithHTML(ctx.i18n.t("helloagin"), actionButtons(ctx));    
         }
     }
 
@@ -32,10 +31,11 @@ export class BotUpdate {
 
     @Action('uz')
     async setlangUz(ctx: Context) {
+        ctx.i18n.locale('uz');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const condidates = await this.botService.updateLang(Number(chatId), 'uz');
         if (condidates) {
-            await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
+            await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
         } else {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         }
@@ -43,10 +43,11 @@ export class BotUpdate {
 
     @Action('ru')
     async setlangRu(ctx: Context) {
+        ctx.i18n.locale('ru');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const condidates = await this.botService.updateLang(Number(chatId), 'ru');
         if (condidates) {
-            await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
+            await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
         } else {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         }
@@ -54,10 +55,12 @@ export class BotUpdate {
 
     @Action('oz')
     async setlangOz(ctx: Context) {
+        ctx.i18n.locale('oz');
+
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const condidates = await this.botService.updateLang(Number(chatId), 'oz');
         if (condidates) {
-            await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
+            await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
         } else {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         }
@@ -65,10 +68,12 @@ export class BotUpdate {
 
     @Action('en')
     async setlangEnd(ctx: Context) {
+        ctx.i18n.locale('en');
+
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const condidates = await this.botService.updateLang(Number(chatId), 'en');
         if (condidates) {
-            await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
+            await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
         } else {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         }
@@ -93,7 +98,7 @@ export class BotUpdate {
     @Action('districtDivisions')
     async sendDistrictDivisions(ctx: Context) {
         ctx.session.type = '';
-        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons());
+        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons(ctx));
     }
 
     @Action('AngrenSend')
@@ -104,13 +109,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -120,9 +125,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -133,9 +138,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -148,7 +153,7 @@ export class BotUpdate {
                 ctx.session.district = '1';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -161,7 +166,7 @@ export class BotUpdate {
                 ctx.session.district = '1';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -175,13 +180,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -191,9 +196,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -204,9 +209,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -219,7 +224,7 @@ export class BotUpdate {
                 ctx.session.district = '2';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -232,7 +237,7 @@ export class BotUpdate {
                 ctx.session.district = '2';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -245,13 +250,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -261,9 +266,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -274,9 +279,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -289,7 +294,7 @@ export class BotUpdate {
                 ctx.session.district = '3';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -302,7 +307,7 @@ export class BotUpdate {
                 ctx.session.district = '3';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -315,13 +320,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -331,9 +336,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -344,9 +349,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -359,7 +364,7 @@ export class BotUpdate {
                 ctx.session.district = '4';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -372,7 +377,7 @@ export class BotUpdate {
                 ctx.session.district = '4';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -385,13 +390,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -401,9 +406,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -414,9 +419,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -429,7 +434,7 @@ export class BotUpdate {
                 ctx.session.district = '5';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -442,7 +447,7 @@ export class BotUpdate {
                 ctx.session.district = '5';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -455,13 +460,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -471,9 +476,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -484,9 +489,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -499,7 +504,7 @@ export class BotUpdate {
                 ctx.session.district = '6';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -512,7 +517,7 @@ export class BotUpdate {
                 ctx.session.district = '6';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -525,13 +530,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -541,9 +546,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -554,9 +559,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -569,7 +574,7 @@ export class BotUpdate {
                 ctx.session.district = '7';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -582,7 +587,7 @@ export class BotUpdate {
                 ctx.session.district = '7';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -595,13 +600,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -611,9 +616,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -624,9 +629,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -639,7 +644,7 @@ export class BotUpdate {
                 ctx.session.district = '8';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -652,7 +657,7 @@ export class BotUpdate {
                 ctx.session.district = '8';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -660,7 +665,7 @@ export class BotUpdate {
 
     @Action('QuyichirchiqSendT')
     async sendDistrictDivisions9(ctx: Context) {
-        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons());
+        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons(ctx));
     }
 
     @Action('OrtachirchiqSendT')
@@ -670,13 +675,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -686,9 +691,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -699,9 +704,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -714,7 +719,7 @@ export class BotUpdate {
                 ctx.session.district = '9';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -727,7 +732,7 @@ export class BotUpdate {
                 ctx.session.district = '9';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -740,13 +745,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -756,9 +761,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -769,9 +774,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -784,7 +789,7 @@ export class BotUpdate {
                 ctx.session.district = '10';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -797,7 +802,7 @@ export class BotUpdate {
                 ctx.session.district = '10';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -810,13 +815,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -826,9 +831,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -839,9 +844,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -854,7 +859,7 @@ export class BotUpdate {
                 ctx.session.district = '11';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -867,7 +872,7 @@ export class BotUpdate {
                 ctx.session.district = '11';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -880,13 +885,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -896,9 +901,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -909,9 +914,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -924,7 +929,7 @@ export class BotUpdate {
                 ctx.session.district = '12';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -937,7 +942,7 @@ export class BotUpdate {
                 ctx.session.district = '12';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -950,13 +955,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -966,9 +971,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -979,9 +984,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -994,7 +999,7 @@ export class BotUpdate {
                 ctx.session.district = '13';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1007,7 +1012,7 @@ export class BotUpdate {
                 ctx.session.district = '13';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1020,13 +1025,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1036,9 +1041,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1049,9 +1054,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1064,7 +1069,7 @@ export class BotUpdate {
                 ctx.session.district = '14';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1077,7 +1082,7 @@ export class BotUpdate {
                 ctx.session.district = '14';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1090,13 +1095,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1106,9 +1111,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1119,9 +1124,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1134,7 +1139,7 @@ export class BotUpdate {
                 ctx.session.district = '15';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1147,7 +1152,7 @@ export class BotUpdate {
                 ctx.session.district = '15';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1160,13 +1165,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1176,9 +1181,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1189,9 +1194,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1204,7 +1209,7 @@ export class BotUpdate {
                 ctx.session.district = '16';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1217,7 +1222,7 @@ export class BotUpdate {
                 ctx.session.district = '16';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1230,13 +1235,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1246,9 +1251,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1259,9 +1264,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1274,7 +1279,7 @@ export class BotUpdate {
                 ctx.session.district = '17';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1287,7 +1292,7 @@ export class BotUpdate {
                 ctx.session.district = '17';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1300,13 +1305,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1316,9 +1321,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1329,9 +1334,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1344,7 +1349,7 @@ export class BotUpdate {
                 ctx.session.district = '18';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1357,7 +1362,7 @@ export class BotUpdate {
                 ctx.session.district = '18';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1370,13 +1375,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1386,9 +1391,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1399,9 +1404,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1414,7 +1419,7 @@ export class BotUpdate {
                 ctx.session.district = '19';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1427,7 +1432,7 @@ export class BotUpdate {
                 ctx.session.district = '19';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1440,13 +1445,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1456,9 +1461,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1469,9 +1474,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1484,7 +1489,7 @@ export class BotUpdate {
                 ctx.session.district = '20';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1497,7 +1502,7 @@ export class BotUpdate {
                 ctx.session.district = '21';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1510,13 +1515,13 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${getDistrict.nameUz}\n${getDistrict.descriptionUz}\n+998${getDistrict.phone}`, Markup.inlineKeyboard([
-                    Markup.button.callback("Lokatsiya 📍", 'Location'),
-                    Markup.button.callback("Orqaga qaytish ◀️", 'Back'),
+                    Markup.button.callback(ctx.i18n.t("LocationSendText"), 'Location'),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
                 }));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
             const chatId = ctx.update['callback_query'].from.id;
@@ -1526,9 +1531,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendReception') {
@@ -1539,9 +1544,9 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
@@ -1554,7 +1559,7 @@ export class BotUpdate {
                 ctx.session.district = '22';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
@@ -1567,7 +1572,7 @@ export class BotUpdate {
                 ctx.session.district = '22';
                 await ctx.editMessageText("Tanlng", setWhenTodayOrMonths());
             } else {
-                await ctx.editMessageText("Tizimda xatolik ❌", actionButtons());
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1575,12 +1580,12 @@ export class BotUpdate {
 
     @Action('Back')
     async sendDistrictDivisions23(ctx: Context) {
-        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons());
+        await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons(ctx));
     }
 
     @Action('BackToMain')
     async sendToMain(ctx: Context) {
-        await ctx.editMessageText("MIB xizmatlarini tanlang", actionButtons());
+        await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
     }
 
     // Hisobat
@@ -1754,19 +1759,19 @@ export class BotUpdate {
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML(`${getHisobat}`, actionButtons());
+            await ctx.replyWithHTML(`${getHisobat}`, actionButtons(ctx));
         } else if (getHisobat==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons());
+            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons(ctx));
         } else {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+            await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
         }
     }
 
@@ -1781,19 +1786,19 @@ export class BotUpdate {
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML(`${getHisobat}`, actionButtons());
+            await ctx.replyWithHTML(`${getHisobat}`, actionButtons(ctx));
         } else if (getHisobat==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons());
+            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons(ctx));
         } else {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+            await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
         }
     }
     //
@@ -1802,14 +1807,14 @@ export class BotUpdate {
     async sendAppelOrReception1(ctx: Context) {
         ctx.session.type = 'sendAppelOrReceptionHisobat';
         ctx.session.whichAppelOrReception = '1';
-        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons());
+        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
     }
 
     @Action('ReceptionSend')
     async sendAppelOrReception2(ctx: Context) {
         ctx.session.type = 'sendReceptionOrAppelHisobat';
         ctx.session.whichAppelOrReception = '2';
-        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons());
+        await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
     }
 
 
@@ -1817,7 +1822,7 @@ export class BotUpdate {
 
     @Action('executiveDocuments')
     async sendExecutiveDocuments(ctx: Context) {
-        await ctx.editMessageText("Yez orada yakunlanadi", actionButtons());
+        await ctx.editMessageText(ctx.i18n.t("soonText"), actionButtons(ctx));
     }
     // Appeal
 
@@ -1827,9 +1832,9 @@ export class BotUpdate {
         const appel = await this.botService.createAppel(Number(chatId), '', '', '', 0,  0);
         if (appel) {
             ctx.session.type = 'SendMessage';
-            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
+            await ctx.replyWithHTML(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
         } else {
-            await ctx.replyWithHTML("Sizni xabar jarayonda ⌛️");
+            await ctx.replyWithHTML(ctx.i18n.t("appelOrReceptionProgress"));
         }
     }
 
@@ -1839,9 +1844,9 @@ export class BotUpdate {
         const reception = await this.botService.createRepection(Number(chatId), '', '', '', 0,  0);
         if (reception) {
             ctx.session.type = 'SendReception';
-            await ctx.replyWithHTML("Murojat uchun tuman yoki shaharni tanlang", districtSendButtons());
+            await ctx.replyWithHTML(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
         } else {
-            await ctx.replyWithHTML("Sizni xabar jarayonda ⌛️")
+            await ctx.replyWithHTML(ctx.i18n.t("appelOrReceptionProgress"))
         }
     }
 
@@ -1857,7 +1862,7 @@ export class BotUpdate {
             if (users) {
                 await ctx.reply("Registratsiya yakunlandi ✅");
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendPhone') {
@@ -1866,9 +1871,9 @@ export class BotUpdate {
 
             if (appel) {
                 ctx.session.type = 'SendDescription';
-                await ctx.replyWithHTML("Xabar mazmuni yozing");
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type == 'SendPhoneReception') {
@@ -1877,9 +1882,9 @@ export class BotUpdate {
 
             if (appel) {
                 ctx.session.type = 'SendDescriptionReception';
-                await ctx.replyWithHTML("Xabar mazmuni yozing");
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }
@@ -1900,7 +1905,7 @@ export class BotUpdate {
             if (done) {
                 await ctx.replyWithHTML("Yangilandi ✅");
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌");
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"));
             }
         }
 
@@ -1924,9 +1929,9 @@ export class BotUpdate {
 
             if (appel) {
                 ctx.session.type = 'SendPassport';
-                await ctx.replyWithHTML("Passport Malumotlarini kiriting \nPassport Seriya (Lotin harflarda) va raqamni kiritin: \n(Namuna: AA000000)");
+                await ctx.replyWithHTML(ctx.i18n.t("passsportSendText"));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
         } else if (ctx.session.type === 'SendPassport') {
@@ -1934,9 +1939,9 @@ export class BotUpdate {
 
             if (appel) {
                 ctx.session.type = 'SendPhone';
-                await ctx.replyWithHTML("Boglanish uchun telefon raqam kiriting raqamni kiritin: \n(Namuna: +998901234567)", sendPhone());
+                await ctx.replyWithHTML(ctx.i18n.t("phoneSendText"), sendPhone(ctx));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
         } else if (ctx.session.type === 'SendPhone') {
@@ -1945,9 +1950,9 @@ export class BotUpdate {
 
             if (appel) {
                 ctx.session.type = 'SendDescription';
-                await ctx.replyWithHTML("Xabar mazmuni yozing", Markup.removeKeyboard());
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"), Markup.removeKeyboard());
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type === 'SendDescription') {
@@ -1968,12 +1973,15 @@ export class BotUpdate {
                 if (appel.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content);
                 }
-
+                
+                if (appel.adminChatId > 0) {
+                    await ctx.telegram.sendMessage(appel.adminChatId, content);
+                }
                 ctx.session.type = 'Done';
-                await ctx.replyWithHTML("Rahmat siz bilan tez orada mas'ul xodim bog'lanadi");
-                await ctx.replyWithHTML("MIB xizmatlarini tanlang", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type === 'SendReceptionPassport') {
@@ -1981,9 +1989,9 @@ export class BotUpdate {
 
             if (reception) {
                 ctx.session.type = 'SendPhoneReception';
-                await ctx.replyWithHTML("Boglanish uchun telefon raqam kiriting raqamni kiritin: \n(Namuna: +998901234567)", sendPhone());
+                await ctx.replyWithHTML(ctx.i18n.t("phoneSendText"), sendPhone(ctx));
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
         } else if (ctx.session.type === 'SendPhoneReception') {
@@ -1992,9 +2000,9 @@ export class BotUpdate {
 
             if (reception) {
                 ctx.session.type = 'SendDescriptionReception';
-                await ctx.replyWithHTML("Xabar mazmuni yozing", Markup.removeKeyboard());
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"), Markup.removeKeyboard());
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         } else if (ctx.session.type === 'SendDescriptionReception') {
@@ -2002,6 +2010,9 @@ export class BotUpdate {
             const reception = await this.botService.setDescriptionReception(Number(chatId), text); 
 
             if (reception) {
+                ctx.session.type = 'DoneReception';
+                await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
                 const content = `${reception.id}\n${reception.passport}\n${reception.phone}\n${reception.description}\n${reception.date}`;
 
                 if (reception.userChatId > 0) {
@@ -2015,11 +2026,13 @@ export class BotUpdate {
                 if (reception.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content);
                 }
-                ctx.session.type = 'DoneReception';
-                await ctx.replyWithHTML("Rahmat siz bilan tez orada mas'ul xodim bog'lanadi");
-                await ctx.replyWithHTML("MIB xizmatlarini tanlang", actionButtons());
+                
+                if (reception.adminChatId > 0) {
+                    await ctx.telegram.sendMessage(reception.adminChatId, content);
+                }
+
             } else {
-                await ctx.replyWithHTML("Tizimda xatolik ❌", actionButtons());
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
         }

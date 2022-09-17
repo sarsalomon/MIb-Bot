@@ -4,15 +4,38 @@
       "id": "5612626311:5612626311",
       "data": {
         "__scenes": {},
-        "type": "sendYearReception",
+        "type": "",
         "whichAppelOrReception": "",
         "district": "",
         "month": "",
-        "year": ""
+        "year": "",
+        "__language_code": "ru"
       }
     },
     {
       "id": "476443896:476443896",
+      "data": {
+        "__scenes": {},
+        "type": ""
+      }
+    },
+    {
+      "id": "848711085:848711085",
+      "data": {
+        "__scenes": {},
+        "type": "SendReceptionPassport"
+      }
+    },
+    {
+      "id": "5369394018:5369394018",
+      "data": {
+        "__scenes": {},
+        "type": "",
+        "__language_code": "ru"
+      }
+    },
+    {
+      "id": "269347631:269347631",
       "data": {
         "__scenes": {},
         "type": ""

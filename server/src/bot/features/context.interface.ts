@@ -1,6 +1,7 @@
 import { Context as ContextTelegraf } from "telegraf";
 
 export interface Context extends ContextTelegraf {
+    i18n: any;
     session: {
         type?: 'SendMessage' | 'SendReception' | 'SendDistrict' | 'SendReceptionDistrict' | 'SendPassport' | 'SendReceptionPassport' | 'SendPhone' | 'SendPhoneReception' | 'SendDescription' | 'SendDescriptionReception' | 'Done'  | 'DoneReception' | 'sendHisobat' | 'sendReceptionOrAppelHisobat' | 'sendAppelOrReceptionHisobat' | 'sendYearAppel' | 'sendYearReception' | '',
         state?: 'Start' | 'SetLang' | 'Setting' | 'Appel' | 'Document' | 'Reception' | '' | '' | '' | '' | '',

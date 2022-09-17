@@ -198,10 +198,12 @@ export class BotService {
                 const Date        = findeAppel.createdAt || 0;
                 if (findeAppel) {
                     const findUser = await this.userRepository.findOne({where: {districtId: findeAppel.districtId}, order:[['id', 'DESC']], include: {all: true}});
+                    const findAdmin = await this.userRepository.findOne({where: {role: "Admin"}, order:[['id', 'DESC']], include: {all: true}});
                     const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
                     const findKansilyariya = await this.userRepository.findOne({where: {role: "Kansilyariya"}, order:[['id', 'DESC']], include: {all: true}});
                     if (findUser) {
                         const UserChatId = findUser.chatId;
+                        const AdminChatId = findAdmin.chatId || 0;
                         const DirectorChatId = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
@@ -209,6 +211,7 @@ export class BotService {
                             passport: Passport,
                             phone: Phone,
                             description: Description,
+                            adminChatId: AdminChatId,
                             userChatId: UserChatId,
                             directorChatId: DirectorChatId,
                             kansilyariyaChatId: KansilyariyaChatId,
@@ -298,10 +301,12 @@ export class BotService {
                 const Date        = findeReception.createdAt || 0;
                 if (findeReception) {
                     const findUser = await this.userRepository.findOne({where: {districtId: findeReception.districtId}, order:[['id', 'DESC']], include: {all: true}});
+                    const findAdmin = await this.userRepository.findOne({where: {role: "Admin"}, order:[['id', 'DESC']], include: {all: true}});
                     const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
                     const findKansilyariya = await this.userRepository.findOne({where: {role: "Kansilyariya"}, order:[['id', 'DESC']], include: {all: true}});
                     if (findUser) {
                         const UserChatId = findUser.chatId;
+                        const AdminChatId = findAdmin.chatId || 0;
                         const DirectorChatId = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
@@ -309,6 +314,7 @@ export class BotService {
                             passport: Passport,
                             phone: Phone,
                             description: Description,
+                            adminChatId: AdminChatId,
                             userChatId: UserChatId,
                             directorChatId: DirectorChatId,
                             kansilyariyaChatId: KansilyariyaChatId,
@@ -319,12 +325,11 @@ export class BotService {
                         return null;
                     }
                 } else {
-
+                    return null;
                 }
             } else {
                 return null;
             }
-
         } else {
             return null;
         }

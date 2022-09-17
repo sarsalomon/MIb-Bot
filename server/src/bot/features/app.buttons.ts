@@ -11,62 +11,50 @@ export function langButtons() {
     })
 }
 
-export function districtButtons() {
-    return Markup.inlineKeyboard([
-        Markup.button.callback('dawd', 'dawd'),
-        Markup.button.callback('dawd', 'dawd'),
-        Markup.button.callback('dawd', 'dawd'),
-        Markup.button.callback('dawd', 'dawd'),
-        Markup.button.callback('dawd', 'dawd'),
-    ], {
-        columns:2
-    })
-}
-
-export function sendPhone() {
+export function sendPhone(ctx) {
     return Markup.keyboard([
-        Markup.button.contactRequest('Raqam yuborish 📱')
+        Markup.button.contactRequest(`${ctx.i18n.t("ContactSendText")}`)
     ]).oneTime().resize()
 }
 
-export function actionButtons() {
+export function actionButtons(ctx) {
     return Markup.inlineKeyboard([
-        Markup.button.callback('Xabar qoldirish ✉️', 'sendMessage'),
-        Markup.button.callback(`Xududiy bo'linmalar 🏢`, 'districtDivisions'),
-        Markup.button.callback('Online murojat ✅', 'onlineAppeal'),
-        Markup.button.callback('Ijro hujjatlari 📄', 'executiveDocuments'),
-        Markup.button.callback('Sozlamalar ⚙️', 'setting')
+        Markup.button.callback(`${ctx.i18n.t("AppelText")}`, 'sendMessage'),
+        Markup.button.callback(`${ctx.i18n.t("ReceptionText")}`, 'onlineAppeal'),
+        Markup.button.callback(`${ctx.i18n.t("DisctrictText")}`, 'districtDivisions'),
+        Markup.button.callback(`${ctx.i18n.t("ExecutiveDocumentsText")}`, 'executiveDocuments'),
+        Markup.button.callback(`${ctx.i18n.t("SettingText")}`, 'setting')
     ], {
         columns: 2
     })
 }
 
 
-export function districtSendButtons() {
+export function districtSendButtons(ctx) {
     return Markup.inlineKeyboard([
-        Markup.button.callback('Angren shahri', 'AngrenSend'),
-        Markup.button.callback('Bekobod shahri', 'BekobodSend'),
-        Markup.button.callback('Bekobod tumani', 'BekobodSendT'),
-        Markup.button.callback("Bo'ka tumani", 'BokaSendT'),
-        Markup.button.callback("Bo'stonlik tumani", 'BostonlikSendT'),
-        Markup.button.callback('Zangiota tumani', 'ZangiotaSendT'),
-        Markup.button.callback('Qibray tumani', 'QibraySendT'),
-        Markup.button.callback('Chirchiq shahri', 'ChirchikSend'),
-        Markup.button.callback('Quyichirchiq tumani', 'QuyichirchiqSendT'),
-        Markup.button.callback("O'rtachirchiq tumani", 'OrtachirchiqSendT'),
-        Markup.button.callback("Yuqorichirchiq tumani", 'YuqorichirchiqSendT'),
-        Markup.button.callback('Nurafshon shahri', 'NurafshonSend'),
-        Markup.button.callback("Oqqo'rg'on tumani", 'OqqorgonSendT'),
-        Markup.button.callback('Olmaliq shahri', 'OlmaliqSend'),
-        Markup.button.callback('Ohangaron shahri', 'OhangaronSend'),
-        Markup.button.callback('Ohangaron tumani', 'OhangaronSendT'),
-        Markup.button.callback('Parkent tumani', 'ParkentSendT'),
-        Markup.button.callback('Pskent tumani', 'PskentSendT'),
-        Markup.button.callback('Toshkent tumani', 'ToshkentSendT'),
-        Markup.button.callback('Chinoz tumani', 'ChinozSendT'),
-        Markup.button.callback("Yangiyo'l shahri", 'YangiyolSend'),
-        Markup.button.callback("Yangiyo'l tumani", 'YangiyolSendT'),
-        Markup.button.callback("Orqaga qaytish ◀️", 'BackToMain'),
+        Markup.button.callback(`${ctx.i18n.t("AngrenCity")}`, 'AngrenSend'),
+        Markup.button.callback(`${ctx.i18n.t("BekobodCity")}`, 'BekobodSend'),
+        Markup.button.callback(`${ctx.i18n.t("Bekobod")}`, 'BekobodSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Buka")}`, 'BokaSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Bustonlik")}`, 'BostonlikSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Zangiota")}`, 'ZangiotaSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Qibray")}`, 'QibraySendT'),
+        Markup.button.callback(`${ctx.i18n.t("Chirchiq")}`, 'ChirchikSend'),
+        Markup.button.callback(`${ctx.i18n.t("Quyinchirchiq")}`, 'QuyichirchiqSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Urtachirchiq")}`, 'OrtachirchiqSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Yuqorichirchiq")}`, 'YuqorichirchiqSendT'),
+        Markup.button.callback(`${ctx.i18n.t("NurafshonCity")}`, 'NurafshonSend'),
+        Markup.button.callback(`${ctx.i18n.t("Oqqorgon")}`, 'OqqorgonSendT'),
+        Markup.button.callback(`${ctx.i18n.t("OlmaliqCity")}`, 'OlmaliqSend'),
+        Markup.button.callback(`${ctx.i18n.t("OhangaronCity")}`, 'OhangaronSend'),
+        Markup.button.callback(`${ctx.i18n.t("Ohangaron")}`, 'OhangaronSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Parkent")}`, 'ParkentSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Pskent")}`, 'PskentSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Toshkent")}`, 'ToshkentSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Chinoz")}`, 'ChinozSendT'),
+        Markup.button.callback(`${ctx.i18n.t("YangiyulCity")}`, 'YangiyolSend'),
+        Markup.button.callback(`${ctx.i18n.t("Yangiyul")}`, 'YangiyolSendT'),
+        Markup.button.callback(`${ctx.i18n.t("BackText")}`, 'BackToMain'),
     ], {
         columns:2
     })
@@ -74,7 +62,7 @@ export function districtSendButtons() {
 
 export function setAppelOrReception() {
     return Markup.inlineKeyboard([
-        Markup.button.callback('Qabul', 'AppelSend'),
+        Markup.button.callback('Xabar', 'AppelSend'),
         Markup.button.callback('Murojat', 'ReceptionSend'),
     ], {
         columns:2
