@@ -103,6 +103,19 @@ export class BotService {
         }
     }
 
+    
+    async updatePhone(chatId: number, phone: string) {
+
+        const condidate = await this.telegramMemberRepository.findOne({where: {chatId}, include: {all: true}});
+
+        if (condidate) {
+            const setLang = await this.telegramMemberRepository.update({phone: phone}, {where: {chatId}});
+            return setLang;
+        } else {
+            return null;
+        }
+    }
+
     async createAppel(chatId: number, passport: string, phone: string, description: string, districtId: number, status: number) {
 
         const condidate = await this.appelRepository.findOne({where: {chatId, status: 0}, order:[['id', 'DESC']], include: {all: true}});

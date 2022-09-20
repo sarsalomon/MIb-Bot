@@ -22,7 +22,7 @@ export function actionButtons(ctx) {
         Markup.button.callback(`${ctx.i18n.t("AppelText")}`, 'sendMessage'),
         Markup.button.callback(`${ctx.i18n.t("ReceptionText")}`, 'onlineAppeal'),
         Markup.button.callback(`${ctx.i18n.t("DisctrictText")}`, 'districtDivisions'),
-        Markup.button.callback(`${ctx.i18n.t("ExecutiveDocumentsText")}`, 'executiveDocuments'),
+        // Markup.button.callback(`${ctx.i18n.t("ExecutiveDocumentsText")}`, 'executiveDocuments'),
         Markup.button.callback(`${ctx.i18n.t("SettingText")}`, 'setting')
     ], {
         columns: 2

@@ -23,46 +23,46 @@ export class District extends Model<District, DistrictAttr> {
     id: number;
 
     @ApiProperty({example: 'Olmaliq', description: 'Uz DistrictName'})
-    @Column({type: DataType.STRING,  unique: true})
+    @Column({type: DataType.TEXT,  unique: true})
     nameUz: string;
 
     @ApiProperty({example: 'Алмалык', description: 'Ru DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     nameRu: string;
 
     @ApiProperty({example: 'Олмалиқ', description: 'Oz DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     nameOz: string;
 
     @ApiProperty({example: 'Almalyk', description: 'En DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     nameEn: string;
 
     @ApiProperty({example: 'Olmaliq', description: 'Uz DistrictName'})
-    @Column({type: DataType.STRING,  unique: true})
+    @Column({type: DataType.TEXT,  unique: true})
     descriptionUz: string;
 
     @ApiProperty({example: 'Алмалык', description: 'Ru DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     descriptionRu: string;
 
     @ApiProperty({example: 'Олмалиқ', description: 'Oz DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     descriptionOz: string;
 
     @ApiProperty({example: 'Almalyk', description: 'En DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     descriptionEn: string;
 
     @ApiProperty({example: 'Almalyk', description: 'En DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     command: string;
 
     @ApiProperty({example: 'Almalyk', description: 'En DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     phone: string;
 
     @ApiProperty({example: 'Almalyk', description: 'En DistrictName'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     location: string;
 }
