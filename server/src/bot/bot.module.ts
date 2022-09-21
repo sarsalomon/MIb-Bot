@@ -14,9 +14,8 @@ import { Reception } from 'src/reception/reception.model';
 import { UsersModule } from 'src/users/users.module';
 import { User } from 'src/users/users.model';
 import { ConfigModule } from '@nestjs/config';
-import { I18n, pluralize } from '@grammyjs/i18n';
+import { I18n } from '@grammyjs/i18n';
 import * as path from 'path';
-import { NestjsGrammyModule } from '@grammyjs/nestjs'
 
 const sessions = new LocalSession({database: 'session_db.json'});
 
@@ -26,9 +25,6 @@ export const i18n = new I18n({
 	sessionName: 'session',
 	useSession: true,
 })
-
-console.log(i18n)
-
 
 @Module({
   controllers: [BotController],

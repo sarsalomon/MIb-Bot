@@ -1,4 +1,5 @@
 import { InjectBot, Start, Update, Action, On, Message, Ctx } from 'nestjs-telegraf';
+import * as path from "path"
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
 import { actionButtons, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
@@ -42,6 +43,7 @@ export class BotUpdate {
         ctx.i18n.locale('uz');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const user = await this.botService.getTelegramMemberByID(Number(chatId));
+        await ctx.answerCbQuery('');
 
         if (user.phone) {
             const condidates = await this.botService.updateLang(Number(chatId), 'uz');
@@ -51,6 +53,7 @@ export class BotUpdate {
                 await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
             }
         } else {
+            
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
     }
@@ -60,6 +63,7 @@ export class BotUpdate {
         ctx.i18n.locale('ru');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const user = await this.botService.getTelegramMemberByID(Number(chatId));
+        await ctx.answerCbQuery('');
 
         if (user.phone) {
             const condidates = await this.botService.updateLang(Number(chatId), 'ru');
@@ -78,6 +82,7 @@ export class BotUpdate {
         ctx.i18n.locale('oz');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const user = await this.botService.getTelegramMemberByID(Number(chatId));
+        await ctx.answerCbQuery('');
 
         if (user.phone) {
             const condidates = await this.botService.updateLang(Number(chatId), 'oz');
@@ -96,6 +101,7 @@ export class BotUpdate {
         ctx.i18n.locale('en');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const user = await this.botService.getTelegramMemberByID(Number(chatId));
+        await ctx.answerCbQuery('');
 
         if (user.phone) {
             const condidates = await this.botService.updateLang(Number(chatId), 'en');
@@ -114,6 +120,7 @@ export class BotUpdate {
         ctx.session.type = '';
         const chatId = ctx.update['callback_query'].message.chat.id;
         const condidate = await this.botService.createTelegramMember({chatId: chatId, name: '', phone: '', districtId: 0, lang: ''});
+        await ctx.answerCbQuery('');
 
         if (!condidate) {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
@@ -130,6 +137,7 @@ export class BotUpdate {
         ctx.session.type = '';
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
+        await ctx.answerCbQuery('');
 
         if (phoneCheck.phone == '' || phoneCheck.phone == null) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
@@ -2249,20 +2257,24 @@ export class BotUpdate {
     @Action('2022Send')
     async sendMonth2022(ctx: Context) {
         ctx.session.year = "2022";
+        await ctx.answerCbQuery('');
 
         const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
-        if (getHisobat>0) {
+        if (getHisobat['count']>0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML(`${getHisobat}`, actionButtons(ctx));
-        } else if (getHisobat==0) {
+            const filePath = path.resolve(__dirname, '..', 'static')
+            await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
+            await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
+        } else if (getHisobat['count']==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
+
             await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons(ctx));
         } else {
             ctx.session.district = ''
@@ -2276,16 +2288,19 @@ export class BotUpdate {
     @Action('2022SendReception')
     async sendMonthReception2022(ctx: Context) {
         ctx.session.year = "2022";
+        await ctx.answerCbQuery('');
 
         const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
-        if (getHisobat>0) {
+        if (getHisobat['count']>0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML(`${getHisobat}`, actionButtons(ctx));
-        } else if (getHisobat==0) {
+            const filePath = path.resolve(__dirname, '..', 'static')
+            await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
+            await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
+        } else if (getHisobat['count']==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
@@ -2338,9 +2353,11 @@ export class BotUpdate {
         const appel = await this.botService.createAppel(Number(chatId), '', '', '', 0,  0);
         if (appel) {
             ctx.session.type = 'SendMessage';
-            await ctx.replyWithHTML(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
+            await ctx.answerCbQuery('');
+            await ctx.editMessageText(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
         } else {
-            await ctx.editMessageText(ctx.i18n.t("AppelProgress"), actionButtons(ctx));
+            await ctx.answerCbQuery('');
+            await ctx.replyWithHTML(ctx.i18n.t("AppelProgress"), Markup.removeKeyboard());
         }
     }
 
@@ -2348,7 +2365,7 @@ export class BotUpdate {
     async sendReception(ctx: Context) {
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
-        console.log(phoneCheck)
+
         if (phoneCheck.phone == '' || phoneCheck.phone == null) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
@@ -2358,9 +2375,11 @@ export class BotUpdate {
         const reception = await this.botService.createRepection(Number(chatId), '', '', '', 0,  0);
         if (reception) {
             ctx.session.type = 'SendReception';
-            await ctx.replyWithHTML(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
+            await ctx.answerCbQuery('');
+            await ctx.editMessageText(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
         } else {
-            await ctx.editMessageText(ctx.i18n.t("ReceptionProgress"), actionButtons(ctx))
+            await ctx.answerCbQuery('');
+            await ctx.replyWithHTML(ctx.i18n.t("ReceptionProgress"), Markup.removeKeyboard());
         }
     }
 
@@ -2368,6 +2387,8 @@ export class BotUpdate {
     async getPhoneForCheck(ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].contact.phone_number;
+
+        console.log(ctx.session.type)
 
         if (ctx.session.type == '') {
     
@@ -2421,14 +2442,6 @@ export class BotUpdate {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].text;
 
-        const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
-
-        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
-            await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
-            await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
-            return
-        }
-
         const appel = text.split(' ')[0];
         const id = text.split(' ')[1];
         const state = text.split(' ')[2];
@@ -2448,30 +2461,45 @@ export class BotUpdate {
         }
 
         if(text.length == 13) {
-            let checkNumber = /^[\w\dА-я]+$/;
+            console.log(ctx.session.type)
 
-            if (checkNumber) {
-                const users = await this.botService.checkMibHumans(text, chatId);
-        
-                if (users) {
-                    await ctx.reply("Registratsiyani yakunlash uchun iltimos pasdagi tugmani bosing", Markup.keyboard([
-                        Markup.button.contactRequest('Telefon yuborish 📲')
-                    ]).oneTime().resize());
-                } else {
-                    const condidate = await this.botService.updatePhone(chatId, text);
+            if (ctx.session.type != 'SendPhone') {
+                if (ctx.session.type != 'SendPhoneReception') {
+                    let checkNumber = /^[\w\dА-я]+$/;
 
-                    if (condidate) {
-                        let sendRegMsg = await ctx.reply(ctx.i18n.t("registrationSuccessText"), Markup.removeKeyboard());
-                        if (sendRegMsg) {
-                            await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
+                    if (!checkNumber.test(text)) {
+                        const users = await this.botService.checkMibHumans(text, chatId);
+                
+                        if (users) {
+                            await ctx.reply("Registratsiyani yakunlash uchun iltimos pasdagi tugmani bosing 👇🏻", Markup.keyboard([
+                                Markup.button.contactRequest('Telefon yuborish 📲')
+                            ]).oneTime().resize());
                         } else {
-                            await ctx.replyWithHTML(ctx.i18n.t("errorText"));
+                            const condidate = await this.botService.updatePhone(chatId, text);
+
+                            if (condidate) {
+                                let sendRegMsg = await ctx.reply(ctx.i18n.t("registrationSuccessText"), Markup.removeKeyboard());
+                                if (sendRegMsg) {
+                                    await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
+                                } else {
+                                    await ctx.replyWithHTML(ctx.i18n.t("errorText"));
+                                }
+                            } else {
+                                await ctx.replyWithHTML(ctx.i18n.t("errorText"));
+                            }
                         }
                     } else {
-                        await ctx.replyWithHTML(ctx.i18n.t("errorText"));
+                        await ctx.replyWithHTML(ctx.i18n.t("registrationErrorPhoneText"), sendPhone(ctx));
                     }
                 }
             }
+        }
+
+        const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
+
+        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
+            await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
+            await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
 
         if (!ctx.session.type) return
@@ -2512,22 +2540,22 @@ export class BotUpdate {
             const appel = await this.botService.setDescription(Number(chatId), text);
             if (appel) {
 
-                const content = `${appel.id}\n${appel.passport}\n${appel.phone}\n${appel.description}\n${appel.date}`;
+                const content = `Yangi Xabar keldi 👇🏻\n\nXabarni ID raqami: <b>${appel.id}</b>\nMurojatchining Passport raqmi: <b>${appel.passport}</b>\nMurojatchining telefon raqami: <b>${appel.phone}</b>\nMurojatchining xabari: <b>${appel.description}</b>\nMurojat qilingan vaqti: <b>${appel.date}</b>\n\nXabar <b>${appel.districtName}</b> ga <b>${appel.userPhone}</b> raqamiga yuborildi`;
 
                 if (appel.userChatId > 0) {
-                    await ctx.telegram.sendMessage(appel.userChatId, content);
+                    await ctx.telegram.sendMessage(appel.userChatId, content, {parse_mode: 'HTML'});
                 }
 
                 if (appel.directorChatId > 0) {
-                    await ctx.telegram.sendMessage(appel.directorChatId, content);
+                    await ctx.telegram.sendMessage(appel.directorChatId, content, {parse_mode: 'HTML'});
                 }
 
                 if (appel.kansilyariyaChatId > 0) {
-                    await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content);
+                    await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content, {parse_mode: 'HTML'});
                 }
                 
                 if (appel.adminChatId > 0) {
-                    await ctx.telegram.sendMessage(appel.adminChatId, content);
+                    await ctx.telegram.sendMessage(appel.adminChatId, content, {parse_mode: 'HTML'});
                 }
                 ctx.session.type = 'Done';
                 await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
@@ -2565,22 +2593,22 @@ export class BotUpdate {
                 ctx.session.type = 'DoneReception';
                 await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
-                const content = `${reception.id}\n${reception.passport}\n${reception.phone}\n${reception.description}\n${reception.date}`;
+                const content = `Yangi Online qabulga so'rov keldi 👇🏻\n\nOnline qabul ID raqami: <b>${reception.id}</b>\nMurojatchining Passport raqmi: <b>${reception.passport}</b>\nMurojatchining telefon raqami: <b>${reception.phone}</b>\nMurojatchining xabari: <b>${reception.description}</b>\nMurojat qilingan vaqti: <b>${reception.date}</b>\n\nOnline qabul <b>${reception.districtName}</b> ga <b>${reception.userPhone}</b> raqamiga yuborildi`;
 
                 if (reception.userChatId > 0) {
-                    await ctx.telegram.sendMessage(reception.userChatId, content);
+                    await ctx.telegram.sendMessage(reception.userChatId, content, {parse_mode: 'HTML'});
                 }
 
                 if (reception.directorChatId > 0) {
-                    await ctx.telegram.sendMessage(reception.directorChatId, content);
+                    await ctx.telegram.sendMessage(reception.directorChatId, content, {parse_mode: 'HTML'});
                 }
 
                 if (reception.kansilyariyaChatId > 0) {
-                    await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content);
+                    await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content, {parse_mode: 'HTML'});
                 }
                 
                 if (reception.adminChatId > 0) {
-                    await ctx.telegram.sendMessage(reception.adminChatId, content);
+                    await ctx.telegram.sendMessage(reception.adminChatId, content, {parse_mode: 'HTML'});
                 }
 
             } else {

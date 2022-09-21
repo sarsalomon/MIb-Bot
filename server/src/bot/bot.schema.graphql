@@ -1,0 +1,10 @@
+type Hisobat {
+    which: Int!
+    district: String!
+    month: Int!
+    year: Int!
+}
+
+type Query {
+    gethisobat: [Hisobat]
+}

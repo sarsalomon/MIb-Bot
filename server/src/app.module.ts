@@ -7,16 +7,32 @@ import { AuthModule } from './auth/auth.module';
 import { BotModule } from './bot/bot.module';
 import { AppelModule } from './appel/appel.module';
 import { DistrictModule } from './district/district.module';
-import { ReceptionController } from './reception/reception.controller';
-import { ReceptionService } from './reception/reception.service';
 import { ReceptionModule } from './reception/reception.module';
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver } from "@nestjs/apollo";
+import { join } from "path";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import * as path from "path"
 
 @Module({
     controllers: [],
     providers: [],
     imports: [
         ConfigModule.forRoot({
+            isGlobal:true,
             envFilePath: '.env'
+        }),
+        // GraphQLModule.forRoot({
+        //   driver: ApolloDriver,
+        //   playground: true,
+        //   typePaths: ['./**/*.graphql'],
+        //   autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+        //   definitions: {
+        //     path: join(process.cwd(), 'src/graphql.ts'),
+        //   }
+        // }),
+        ServeStaticModule.forRoot({
+          rootPath: path.resolve(__dirname, 'static'),
         }),
         SequelizeModule.forRoot({
           dialect: 'postgres',

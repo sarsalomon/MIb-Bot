@@ -30,8 +30,12 @@
       "id": "5369394018:5369394018",
       "data": {
         "__scenes": {},
-        "type": "",
-        "__language_code": "ru"
+        "type": "sendYearAppel",
+        "__language_code": "uz",
+        "whichAppelOrReception": "",
+        "district": "",
+        "month": "",
+        "year": ""
       }
     },
     {
@@ -46,7 +50,11 @@
       "data": {
         "__scenes": {},
         "type": "",
-        "__language_code": "en"
+        "__language_code": "oz",
+        "whichAppelOrReception": "",
+        "district": "",
+        "month": "",
+        "year": ""
       }
     }
   ]

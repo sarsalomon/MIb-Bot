@@ -7,6 +7,10 @@ import { Reception } from 'src/reception/reception.model';
 import { District } from 'src/district/district.model';
 import { User } from 'src/users/users.model';
 import { Op } from 'sequelize';
+import * as excelJS from "exceljs";
+import * as path from "path"
+import * as fs from 'fs';
+import * as uuid from 'uuid';
 
 @Injectable()
 export class BotService {
@@ -202,6 +206,9 @@ export class BotService {
             const setdescription = await this.appelRepository.update({description: description}, {where: {chatId,  status: 0}});
             if (setdescription) {
                 const findeAppel = await this.appelRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
+                const districtId  = findeAppel.districtId || 1;
+                const findeDistrict = await this.districtRepository.findOne({where: {id: districtId}});
+                const DistrictName  = findeDistrict.nameUz || "Tizimda xatolik qidirilivotgan Tuman yoki Shahar topilmadi";
                 const Id          = findeAppel.id || 0;
                 const Passport    = findeAppel.passport || 0;
                 const Phone       = findeAppel.phone || 0;
@@ -213,12 +220,15 @@ export class BotService {
                     const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
                     const findKansilyariya = await this.userRepository.findOne({where: {role: "Kansilyariya"}, order:[['id', 'DESC']], include: {all: true}});
                     if (findUser) {
-                        const UserChatId = findUser.chatId;
-                        const AdminChatId = findAdmin.chatId || 0;
-                        const DirectorChatId = findDirector.chatId || 0;
+                        const UserChatId         = findUser.chatId;
+                        const UserPhone          = findUser.phone || "Tizimda telefon raqami mavjud emas ekan";
+                        const AdminChatId        = findAdmin.chatId || 0;
+                        const DirectorChatId     = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
                             id: Id,
+                            districtName: DistrictName,
+                            userPhone: UserPhone,
                             passport: Passport,
                             phone: Phone,
                             description: Description,
@@ -305,23 +315,30 @@ export class BotService {
             const setdescription = await this.receptionRepository.update({description: description}, {where: {chatId,  status: 0}});
             if (setdescription) {
                 const findeReception = await this.receptionRepository.findOne({where: {chatId}, order:[['id', 'DESC']], include: {all: true}});
+                const districtId  = findeReception.districtId || 1;
+                const findeDistrict = await this.districtRepository.findOne({where: {id: districtId}});
+                const DistrictName  = findeDistrict.nameUz || "Tizimda xatolik qidirilivotgan Tuman yoki Shahar topilmadi";
                 const Id          = findeReception.id || 0;
                 const Passport    = findeReception.passport || 0;
                 const Phone       = findeReception.phone || 0;
                 const Description = findeReception.description || 0;
                 const Date        = findeReception.createdAt || 0;
+                console.log(Date)
                 if (findeReception) {
                     const findUser = await this.userRepository.findOne({where: {districtId: findeReception.districtId}, order:[['id', 'DESC']], include: {all: true}});
                     const findAdmin = await this.userRepository.findOne({where: {role: "Admin"}, order:[['id', 'DESC']], include: {all: true}});
                     const findDirector = await this.userRepository.findOne({where: {role: "Director"}, order:[['id', 'DESC']], include: {all: true}});
                     const findKansilyariya = await this.userRepository.findOne({where: {role: "Kansilyariya"}, order:[['id', 'DESC']], include: {all: true}});
                     if (findUser) {
-                        const UserChatId = findUser.chatId;
-                        const AdminChatId = findAdmin.chatId || 0;
-                        const DirectorChatId = findDirector.chatId || 0;
+                        const UserChatId         = findUser.chatId;
+                        const UserPhone          = findUser.phone || "Tizimda telefon raqami mavjud emas ekan";
+                        const AdminChatId        = findAdmin.chatId || 0;
+                        const DirectorChatId     = findDirector.chatId || 0;
                         const KansilyariyaChatId = findKansilyariya.chatId || 0;
                         const obj = {
                             id: Id,
+                            districtName: DistrictName,
+                            userPhone: UserPhone,
                             passport: Passport,
                             phone: Phone,
                             description: Description,
@@ -348,6 +365,12 @@ export class BotService {
     }
 
     async getHisobat(which: number, district:string, month: number, year: number) {
+
+            const workbook = new excelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Countries List');
+
+
+              
         let today = new Date();
         let newmonth = today.getMonth()+1;
         let day = today.getDate();
@@ -362,15 +385,132 @@ export class BotService {
             endDate = new Date(`${year}-${month}-31 00:00:00`);
         }
 
-        if (which == 1) {
 
-            const CountAppel = await this.appelRepository.count({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}} , include: {all: true}, });
-            return CountAppel;
+        if (which == 1) {
+            const getDBC = await this.districtRepository.findOne({where: {id:district}});
+
+            const CountAppel = await this.appelRepository.findAll({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}} , include: {all: true}, });
+
+            let monthforxl:string = 'Xatolik';
+
+            if(month == 0){
+                monthforxl = "Bugun";
+            } else if(month == 1){
+                monthforxl = "Yanvar";
+            } else if(month == 2){
+                monthforxl = "Fevral";
+            } else if(month == 3){
+                monthforxl = "Mart";
+            } else if(month == 4){
+                monthforxl = "Aprel";
+            } else if(month == 5){
+                monthforxl = "Mau";
+            } else if(month == 6){
+                monthforxl = "Iyun";
+            } else if(month == 7){
+                monthforxl = "Iyul";
+            } else if(month == 8){
+                monthforxl = "Avgust";
+            } else if(month == 9){
+                monthforxl = "Sentyabr";
+            } else if(month == 10){
+                monthforxl = "Oktyabr";
+            } else if(month == 11){
+                monthforxl = "Noyabr";
+            } else if(month == 12){
+                monthforxl = "Dekabr";
+            }
+
+            worksheet.columns = [
+                { key: 'id', header: 'ID' },
+                { key: 'passport', header: 'Passport' },
+                { key: 'phone', header: 'Telefon Raqam' },
+                { key: 'description', header: 'Murojat mazmuni' },
+                { key: 'districtId', header: 'Tuman yoki Shahar' },
+                { key: 'status', header: 'Holati' },
+                { key: 'createdAt', header: 'Yaratilgan sana' },
+            ];
+    
+    
+            const filePath = path.resolve(__dirname, '..', 'static')
+            if (!fs.existsSync(filePath)) {
+                fs.mkdirSync(filePath, {recursive: true})
+            }
+    
+            const exportPath = path.resolve(filePath, `Online murojat ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
+                
+            await workbook.xlsx.writeFile(exportPath);
+
+            const obj = {
+                count: CountAppel.length,
+                SendFilePath: exportPath,
+            }
+
+            return obj;
 
         } else if (which == 2) {
+            const getDBC = await this.districtRepository.findOne({where: {id:district}});
+            
+            const CountReception = await this.receptionRepository.findAll({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}}, include: {all: true}});
 
-            const CountReception = await this.receptionRepository.count({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}}, include: {all: true}});
-            return CountReception;
+            let monthforxl:string = 'Xatolik';
+
+            if(month == 0){
+                monthforxl = "Bugun";
+            } else if(month == 1){
+                monthforxl = "Yanvar";
+            } else if(month == 2){
+                monthforxl = "Fevral";
+            } else if(month == 3){
+                monthforxl = "Mart";
+            } else if(month == 4){
+                monthforxl = "Aprel";
+            } else if(month == 5){
+                monthforxl = "Mau";
+            } else if(month == 6){
+                monthforxl = "Iyun";
+            } else if(month == 7){
+                monthforxl = "Iyul";
+            } else if(month == 8){
+                monthforxl = "Avgust";
+            } else if(month == 9){
+                monthforxl = "Sentyabr";
+            } else if(month == 10){
+                monthforxl = "Oktyabr";
+            } else if(month == 11){
+                monthforxl = "Noyabr";
+            } else if(month == 12){
+                monthforxl = "Dekabr";
+            }
+
+            worksheet.columns = [
+                { key: 'id', header: 'ID' },
+                { key: 'passport', header: 'Passport' },
+                { key: 'phone', header: 'Telefon Raqam' },
+                { key: 'description', header: 'Murojat mazmuni' },
+                { key: 'districtId', header: 'Tuman yoki Shahar' },
+                { key: 'status', header: 'Holati' },
+                { key: 'createdAt', header: 'Yaratilgan sana' },
+            ];
+    
+            CountReception.forEach((item) => {
+                worksheet.addRow(item);
+            });
+    
+            const filePath = path.resolve(__dirname, '..', 'static')
+            if (!fs.existsSync(filePath)) {
+                fs.mkdirSync(filePath, {recursive: true})
+            }
+    
+            const exportPath = path.resolve(filePath, `Online murojat ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
+            await workbook.xlsx.writeFile(exportPath);
+
+            const obj = {
+                count: CountReception.length,
+                SendFilePath: exportPath,
+            }
+
+            return obj;
 
         }
 
