@@ -1006,7 +1006,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '9';
+                ctx.session.district = '10';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1019,7 +1019,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '9';
+                ctx.session.district = '10';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1094,7 +1094,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '10';
+                ctx.session.district = '11';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1107,7 +1107,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '10';
+                ctx.session.district = '11';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1182,7 +1182,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '11';
+                ctx.session.district = '12';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1195,7 +1195,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '11';
+                ctx.session.district = '12';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1270,7 +1270,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '12';
+                ctx.session.district = '13';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1283,7 +1283,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '12';
+                ctx.session.district = '13';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1358,7 +1358,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '13';
+                ctx.session.district = '14';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1371,7 +1371,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '13';
+                ctx.session.district = '14';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1446,7 +1446,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '14';
+                ctx.session.district = '15';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1459,7 +1459,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '14';
+                ctx.session.district = '15';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1534,7 +1534,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '15';
+                ctx.session.district = '16';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1547,7 +1547,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '15';
+                ctx.session.district = '16';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1622,7 +1622,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '16';
+                ctx.session.district = '17';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1635,7 +1635,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '16';
+                ctx.session.district = '17';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1710,7 +1710,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '17';
+                ctx.session.district = '18';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1723,7 +1723,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '17';
+                ctx.session.district = '18';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1798,7 +1798,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '18';
+                ctx.session.district = '19';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1811,7 +1811,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '18';
+                ctx.session.district = '19';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1886,7 +1886,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '19';
+                ctx.session.district = '20';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1899,7 +1899,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearReception';
-                ctx.session.district = '19';
+                ctx.session.district = '20';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
@@ -1974,7 +1974,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 ctx.session.type = 'sendYearAppel';
-                ctx.session.district = '20';
+                ctx.session.district = '21';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));

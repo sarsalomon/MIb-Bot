@@ -366,8 +366,8 @@ export class BotService {
 
     async getHisobat(which: number, district:string, month: number, year: number) {
 
-            const workbook = new excelJS.Workbook();
-            const worksheet = workbook.addWorksheet('Countries List');
+        const workbook = new excelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Countries List');
 
 
               
@@ -390,7 +390,7 @@ export class BotService {
             const getDBC = await this.districtRepository.findOne({where: {id:district}});
 
             const CountAppel = await this.appelRepository.findAll({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}} , include: {all: true}, });
-
+            console.log(CountAppel)
             let monthforxl:string = 'Xatolik';
 
             if(month == 0){
@@ -431,13 +431,18 @@ export class BotService {
                 { key: 'createdAt', header: 'Yaratilgan sana' },
             ];
     
-    
+        
+            CountAppel.forEach((item) => {
+                worksheet.addRow(item);
+            });
+
+
             const filePath = path.resolve(__dirname, '..', 'static')
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, {recursive: true})
             }
     
-            const exportPath = path.resolve(filePath, `Online murojat ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
+            const exportPath = path.resolve(filePath, `Xabar ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
                 
             await workbook.xlsx.writeFile(exportPath);
 
