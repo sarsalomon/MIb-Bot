@@ -365,7 +365,7 @@ export class BotService {
 
     }
 
-    async getHisobat(which: number, district:string, month: number, year: number) {
+    async getHisobot(which: number, district:string, month: number, year: number) {
 
         const workbook = new excelJS.Workbook();
         const worksheet = workbook.addWorksheet('Countries List');

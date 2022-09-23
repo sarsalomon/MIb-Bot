@@ -206,7 +206,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -219,7 +219,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -296,7 +296,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -309,7 +309,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -385,7 +385,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -398,7 +398,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -474,7 +474,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -487,7 +487,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -563,7 +563,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -576,7 +576,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -652,7 +652,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -665,7 +665,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -741,7 +741,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -754,7 +754,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -830,7 +830,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -843,7 +843,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -919,7 +919,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -932,7 +932,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1008,7 +1008,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1021,7 +1021,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1097,7 +1097,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1110,7 +1110,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1186,7 +1186,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1199,7 +1199,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1275,7 +1275,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1288,7 +1288,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1364,7 +1364,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1377,7 +1377,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1453,7 +1453,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1466,7 +1466,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1542,7 +1542,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1555,7 +1555,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1631,7 +1631,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1644,7 +1644,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1720,7 +1720,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1733,7 +1733,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1809,7 +1809,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1822,7 +1822,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1898,7 +1898,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1911,7 +1911,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -1987,7 +1987,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -2000,7 +2000,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -2076,7 +2076,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendReceptionOrAppelHisobat') {
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -2089,7 +2089,7 @@ export class BotUpdate {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
-        } else if (ctx.session.type == 'sendAppelOrReceptionHisobat') {
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
             const command = ctx.update['callback_query'].data;
 
             const getDistrict = await this.botService.getDisctrictByCommand(command);
@@ -2117,7 +2117,7 @@ export class BotUpdate {
         await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
     }
 
-    // Hisobat
+    // Hisobot
 
     @Action('BugunSend')
     async sendMonthB(ctx: Context) {
@@ -2276,22 +2276,22 @@ export class BotUpdate {
         }
     }
 
-    // Hisobat Year
+    // Hisobot Year
     @Action('2022Send')
     async sendMonth2022(ctx: Context) {
         ctx.session.year = "2022";
         await ctx.answerCbQuery('');
 
-        const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
+        const getHisobot = await this.botService.getHisobot(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
-        if (getHisobat['count']>0) {
+        if (getHisobot['count']>0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
-            await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
-        } else if (getHisobat['count']==0) {
+            await ctx.replyWithDocument({source: getHisobot['SendFilePath']}); 
+            await ctx.replyWithHTML(`${getHisobot['count']}`, actionButtons(ctx));
+        } else if (getHisobot['count']==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
@@ -2312,16 +2312,16 @@ export class BotUpdate {
         ctx.session.year = "2022";
         await ctx.answerCbQuery('');
 
-        const getHisobat = await this.botService.getHisobat(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
+        const getHisobot = await this.botService.getHisobot(Number(ctx.session.whichAppelOrReception), ctx.session.district, Number(ctx.session.month), Number(ctx.session.year));
 
-        if (getHisobat['count']>0) {
+        if (getHisobot['count']>0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
-            await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
-        } else if (getHisobat['count']==0) {
+            await ctx.replyWithDocument({source: getHisobot['SendFilePath']}); 
+            await ctx.replyWithHTML(`${getHisobot['count']}`, actionButtons(ctx));
+        } else if (getHisobot['count']==0) {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
@@ -2339,7 +2339,7 @@ export class BotUpdate {
 
     @Action('AppelSend')
     async sendAppelOrReception1(ctx: Context) {
-        ctx.session.type = 'sendAppelOrReceptionHisobat';
+        ctx.session.type = 'sendAppelOrReceptionHisobot';
         ctx.session.whichAppelOrReception = '1';
         await ctx.answerCbQuery('');
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
@@ -2347,7 +2347,7 @@ export class BotUpdate {
 
     @Action('ReceptionSend')
     async sendAppelOrReception2(ctx: Context) {
-        ctx.session.type = 'sendReceptionOrAppelHisobat';
+        ctx.session.type = 'sendReceptionOrAppelHisobot';
         ctx.session.whichAppelOrReception = '2';
         await ctx.answerCbQuery('');
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
@@ -2490,8 +2490,8 @@ export class BotUpdate {
             }
         }
 
-        if (text == 'Hisobat') {
-            ctx.session.type = 'sendHisobat';
+        if (text == 'Hisobot') {
+            ctx.session.type = 'sendHisobot';
             await ctx.replyWithHTML("Tanlang", setAppelOrReception());
         }
 
