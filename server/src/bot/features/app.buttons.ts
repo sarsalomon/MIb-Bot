@@ -2,9 +2,9 @@ import { Markup } from "telegraf";
 
 export function langButtons() {
     return Markup.inlineKeyboard([
-        Markup.button.callback('Uzbek 🇺🇿', 'uz'),
+        Markup.button.callback(`O'zbek Lotin 🇺🇿`, 'uz'),
         Markup.button.callback('Русский 🇷🇺', 'ru'),
-        Markup.button.callback('Кирилча 🇺🇿🇷🇺', 'oz'),
+        Markup.button.callback('Ўзбек Кириллица 🇺🇿🇷🇺', 'oz'),
         Markup.button.callback('English 🇺🇸', 'en'),
     ], {
         columns:2

@@ -149,7 +149,7 @@ export class BotUpdate {
 
     @Action('AngrenSend')
     async sendDistrictDivisions1(ctx: Context) {
-        
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -172,7 +172,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir//''/@41.0083633,70.0814991,4645m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x38afe9a32fc0878b:0xc6b86b6db55e1d88!2m2!1d70.0871445!2d41.0079382"),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0088541,70.0872224/@41.00847,70.0861686,497m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -238,6 +238,7 @@ export class BotUpdate {
 
     @Action('BekobodSend')
     async sendDistrictDivisions2(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -261,7 +262,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.2206741,69.2428551/@40.220538,69.2426778,112m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -326,6 +327,7 @@ export class BotUpdate {
 
     @Action('BekobodSendT')
     async sendDistrictDivisions3(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -349,7 +351,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -414,6 +416,7 @@ export class BotUpdate {
 
     @Action('BokaSendT')
     async sendDistrictDivisions4(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -437,7 +440,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.8131083,69.2010451/@40.8129822,69.200518,166m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -502,6 +505,7 @@ export class BotUpdate {
 
     @Action('BostonlikSendT')
     async sendDistrictDivisions5(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -525,7 +529,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.5655674,69.7661692/@41.5606107,69.7639875,5452m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -590,6 +594,7 @@ export class BotUpdate {
 
     @Action('ZangiotaSendT')
     async sendDistrictDivisions6(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -678,6 +683,7 @@ export class BotUpdate {
 
     @Action('QibraySendT')
     async sendDistrictDivisions7(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -766,6 +772,7 @@ export class BotUpdate {
 
     @Action('ChirchikSend')
     async sendDistrictDivisions8(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -789,7 +796,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.4720279,69.5928962/@41.4717369,69.592484,247m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -854,6 +861,7 @@ export class BotUpdate {
 
     @Action('QuyichirchiqSendT')
     async sendDistrictDivisions9(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -877,7 +885,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.8587013,68.9432824/@40.8582171,68.9428474,205m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -942,6 +950,7 @@ export class BotUpdate {
 
     @Action('OrtachirchiqSendT')
     async sendDistrictDivisions10(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -965,7 +974,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0685847,69.2729809/@41.0688703,69.2707882,884m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1030,6 +1039,7 @@ export class BotUpdate {
 
     @Action('YuqorichirchiqSendT')
     async sendDistrictDivisions11(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1118,6 +1128,7 @@ export class BotUpdate {
 
     @Action('NurafshonSend')
     async sendDistrictDivisions12(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1206,6 +1217,7 @@ export class BotUpdate {
 
     @Action('OqqorgonSendT')
     async sendDistrictDivisions13(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1294,6 +1306,7 @@ export class BotUpdate {
 
     @Action('OlmaliqSend')
     async sendDistrictDivisions14(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1317,7 +1330,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.8500771,69.59959/@40.8493033,69.5996596,307m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1382,6 +1395,7 @@ export class BotUpdate {
 
     @Action('OhangaronSend')
     async sendDistrictDivisions15(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1405,7 +1419,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.9061299,69.6369443/@40.9063652,69.6358553,384m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1470,6 +1484,7 @@ export class BotUpdate {
 
     @Action('OhangaronSendT')
     async sendDistrictDivisions16(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1558,6 +1573,7 @@ export class BotUpdate {
 
     @Action('ParkentSendT')
     async sendDistrictDivisions17(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1581,7 +1597,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.303532,69.6366268/@41.3034376,69.636337,156m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1646,6 +1662,7 @@ export class BotUpdate {
 
     @Action('PskentSendT')
     async sendDistrictDivisions18(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1734,6 +1751,7 @@ export class BotUpdate {
 
     @Action('ToshkentSendT')
     async sendDistrictDivisions19(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1757,7 +1775,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.404793,69.2013245/@41.4043506,69.2012477,203m/data=!3m1!1e3!4m9!4m8!1m5!3m4!1m2!1d69.202016!2d41.4046684!3s0x38ae8df9af383881:0xf6d446c882fa91d6!1m0!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1822,6 +1840,7 @@ export class BotUpdate {
 
     @Action('ChinozSendT')
     async sendDistrictDivisions20(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1845,7 +1864,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.9268845,68.7498011/@40.9269701,68.749362,271m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -1910,6 +1929,7 @@ export class BotUpdate {
 
     @Action('YangiyolSend')
     async sendDistrictDivisions21(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -1998,6 +2018,7 @@ export class BotUpdate {
 
     @Action('YangiyolSendT')
     async sendDistrictDivisions22(ctx: Context) {
+        await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
@@ -2021,7 +2042,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0733546,69.0247084/@41.0733638,69.0231761,511m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -2086,11 +2107,13 @@ export class BotUpdate {
 
     @Action('Back')
     async sendDistrictDivisions23(ctx: Context) {
+        await ctx.answerCbQuery('');
         await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons(ctx));
     }
 
     @Action('BackToMain')
     async sendToMain(ctx: Context) {
+        await ctx.answerCbQuery('');
         await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
     }
 
@@ -2099,7 +2122,7 @@ export class BotUpdate {
     @Action('BugunSend')
     async sendMonthB(ctx: Context) {
         ctx.session.month = '0';
-
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2111,7 +2134,7 @@ export class BotUpdate {
     @Action('YanvarSend')
     async sendMonthY(ctx: Context) {
         ctx.session.month = '01';
-
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2124,7 +2147,7 @@ export class BotUpdate {
     @Action('FevralSend')
     async sendMonthF(ctx: Context) {
         ctx.session.month = '02';
-
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2136,7 +2159,7 @@ export class BotUpdate {
     @Action('MartSend')
     async sendMonthM(ctx: Context) {
         ctx.session.month = '03';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2148,7 +2171,7 @@ export class BotUpdate {
     @Action('AprelSend')
     async sendMonthA(ctx: Context) {
         ctx.session.month = '04';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2160,7 +2183,7 @@ export class BotUpdate {
     @Action('MaySend')
     async sendMonthMa(ctx: Context) {
         ctx.session.month = '05';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2172,7 +2195,7 @@ export class BotUpdate {
     @Action('IyunSend')
     async sendMonthI(ctx: Context) {
         ctx.session.month = '06';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2184,7 +2207,7 @@ export class BotUpdate {
     @Action('IyulSend')
     async sendMonthIy(ctx: Context) {
         ctx.session.month = '07';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2196,7 +2219,7 @@ export class BotUpdate {
     @Action('AvgustSend')
     async sendMonthAv(ctx: Context) {
         ctx.session.month = '08';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2208,7 +2231,7 @@ export class BotUpdate {
     @Action('SentyabrSend')
     async sendMonthS(ctx: Context) {
         ctx.session.month = '09';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2220,7 +2243,7 @@ export class BotUpdate {
     @Action('OktyabrSend')
     async sendMonthO(ctx: Context) {
         ctx.session.month = '10';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2232,7 +2255,7 @@ export class BotUpdate {
     @Action('NoyabrSend')
     async sendMonthN(ctx: Context) {
         ctx.session.month = '11';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2244,7 +2267,7 @@ export class BotUpdate {
     @Action('DekabrSend')
     async sendMonthD(ctx: Context) {
         ctx.session.month = '12';
-        
+        await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
 
@@ -2266,7 +2289,6 @@ export class BotUpdate {
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            const filePath = path.resolve(__dirname, '..', 'static')
             await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
             await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
         } else if (getHisobat['count']==0) {
@@ -2297,7 +2319,6 @@ export class BotUpdate {
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            const filePath = path.resolve(__dirname, '..', 'static')
             await ctx.replyWithDocument({source: getHisobat['SendFilePath']}); 
             await ctx.replyWithHTML(`${getHisobat['count']}`, actionButtons(ctx));
         } else if (getHisobat['count']==0) {
@@ -2320,6 +2341,7 @@ export class BotUpdate {
     async sendAppelOrReception1(ctx: Context) {
         ctx.session.type = 'sendAppelOrReceptionHisobat';
         ctx.session.whichAppelOrReception = '1';
+        await ctx.answerCbQuery('');
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
     }
 
@@ -2327,6 +2349,7 @@ export class BotUpdate {
     async sendAppelOrReception2(ctx: Context) {
         ctx.session.type = 'sendReceptionOrAppelHisobat';
         ctx.session.whichAppelOrReception = '2';
+        await ctx.answerCbQuery('');
         await ctx.editMessageText("Tuman yoki Shaharni tanlang", districtSendButtons(ctx));
     }
 
@@ -2334,6 +2357,7 @@ export class BotUpdate {
 
     @Action('executiveDocuments')
     async sendExecutiveDocuments(ctx: Context) {
+        await ctx.answerCbQuery('');
         await ctx.editMessageText(ctx.i18n.t("soonText"), actionButtons(ctx));
     }
 
@@ -2387,17 +2411,28 @@ export class BotUpdate {
     async getPhoneForCheck(ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         const text = ctx.update['message'].contact.phone_number;
+        const specialChars = `/[+]+/;`
 
-        console.log(ctx.session.type)
+        const isSpecialCharsPresent = specialChars.split('').some(char => 
+        text.includes(char))
+        
+        let plusnumber:string;
+        if (isSpecialCharsPresent) {
+            plusnumber = ctx.update['message'].contact.phone_number
+        } else {
+            plusnumber = '+' + ctx.update['message'].contact.phone_number
+        }
 
+        console.log(`old: ${text}`)
+        console.log(`new: ${plusnumber}`)
         if (ctx.session.type == '') {
     
-            const users = await this.botService.checkMibHumans(text, chatId);
+            const users = await this.botService.checkMibHumans(plusnumber, chatId);
     
             if (users) {
                 await ctx.reply(ctx.i18n.t("registrationSuccessText"), actionButtons(ctx));
             } else {
-                const condidate = await this.botService.updatePhone(chatId, text);
+                const condidate = await this.botService.updatePhone(chatId, plusnumber);
 
                 if (condidate) {
                     let sendRegMsg = await ctx.reply(ctx.i18n.t("registrationSuccessText"), Markup.removeKeyboard());
@@ -2413,7 +2448,7 @@ export class BotUpdate {
 
         } else if (ctx.session.type == 'SendPhone') {
 
-            const appel = await this.botService.setPhone(Number(chatId), text)
+            const appel = await this.botService.setPhone(Number(chatId), plusnumber)
 
             if (appel) {
                 ctx.session.type = 'SendDescription';
@@ -2424,7 +2459,7 @@ export class BotUpdate {
 
         } else if (ctx.session.type == 'SendPhoneReception') {
 
-            const appel = await this.botService.setPhoneReception(Number(chatId), text)
+            const appel = await this.botService.setPhoneReception(Number(chatId), plusnumber)
 
             if (appel) {
                 ctx.session.type = 'SendDescriptionReception';
@@ -2461,21 +2496,32 @@ export class BotUpdate {
         }
 
         if(text.length == 13) {
-            console.log(ctx.session.type)
 
             if (ctx.session.type != 'SendPhone') {
                 if (ctx.session.type != 'SendPhoneReception') {
                     let checkNumber = /^[\w\dА-я]+$/;
 
                     if (!checkNumber.test(text)) {
-                        const users = await this.botService.checkMibHumans(text, chatId);
+                        const specialChars = `/[+]+/;`
+
+                        const isSpecialCharsPresent = specialChars.split('').some(char => 
+                        text.includes(char))
+                        
+                        let plusnumber:string;
+                        if (isSpecialCharsPresent) {
+                            plusnumber = ctx.update['message'].contact.phone_number
+                        } else {
+                            plusnumber = '+' + ctx.update['message'].contact.phone_number
+                        }
+                
+                        const users = await this.botService.checkMibHumans(plusnumber, chatId);
                 
                         if (users) {
                             await ctx.reply("Registratsiyani yakunlash uchun iltimos pasdagi tugmani bosing 👇🏻", Markup.keyboard([
                                 Markup.button.contactRequest('Telefon yuborish 📲')
                             ]).oneTime().resize());
                         } else {
-                            const condidate = await this.botService.updatePhone(chatId, text);
+                            const condidate = await this.botService.updatePhone(chatId, plusnumber);
 
                             if (condidate) {
                                 let sendRegMsg = await ctx.reply(ctx.i18n.t("registrationSuccessText"), Markup.removeKeyboard());
@@ -2548,14 +2594,23 @@ export class BotUpdate {
 
                 if (appel.directorChatId > 0) {
                     await ctx.telegram.sendMessage(appel.directorChatId, content, {parse_mode: 'HTML'});
+                    if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
+                        await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
 
                 if (appel.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content, {parse_mode: 'HTML'});
+                    if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
+                        await ctx.telegram.sendMessage(appel.kansilyariyaChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
                 
                 if (appel.adminChatId > 0) {
                     await ctx.telegram.sendMessage(appel.adminChatId, content, {parse_mode: 'HTML'});
+                    if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
+                        await ctx.telegram.sendMessage(appel.adminChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
                 ctx.session.type = 'Done';
                 await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
@@ -2601,14 +2656,23 @@ export class BotUpdate {
 
                 if (reception.directorChatId > 0) {
                     await ctx.telegram.sendMessage(reception.directorChatId, content, {parse_mode: 'HTML'});
+                    if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
+                        await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
 
                 if (reception.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content, {parse_mode: 'HTML'});
+                    if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
+                        await ctx.telegram.sendMessage(reception.kansilyariyaChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
                 
                 if (reception.adminChatId > 0) {
                     await ctx.telegram.sendMessage(reception.adminChatId, content, {parse_mode: 'HTML'});
+                    if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
+                        await ctx.telegram.sendMessage(reception.adminChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                    }
                 }
 
             } else {
@@ -2618,7 +2682,5 @@ export class BotUpdate {
         }
 
     }
-
-
 
 }

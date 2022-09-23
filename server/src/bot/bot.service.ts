@@ -53,12 +53,14 @@ export class BotService {
             if (user.chatId>0) {
                 if (user.phone == text && user.chatId == chatId) {
                     const updateStatus = await this.userRepository.update({status: 1}, {where: {phone: text}});
+                    const updatePhone = await this.telegramMemberRepository.update({phone: text}, {where: {chatId: chatId}});
                     return updateStatus;
                 } else {
                     return null;
                 }
             } else {
-                const updateChatId = await this.userRepository.update({chatId: chatId}, {where: {phone: text}});
+                const updateChatId = await this.userRepository.update({chatId: chatId, status: 1}, {where: {phone: text}});
+                const updatePhone = await this.telegramMemberRepository.update({phone: text}, {where: {chatId: chatId}});
                 return updateChatId;
             }
         } else {
@@ -323,7 +325,6 @@ export class BotService {
                 const Phone       = findeReception.phone || 0;
                 const Description = findeReception.description || 0;
                 const Date        = findeReception.createdAt || 0;
-                console.log(Date)
                 if (findeReception) {
                     const findUser = await this.userRepository.findOne({where: {districtId: findeReception.districtId}, order:[['id', 'DESC']], include: {all: true}});
                     const findAdmin = await this.userRepository.findOne({where: {role: "Admin"}, order:[['id', 'DESC']], include: {all: true}});
@@ -390,7 +391,6 @@ export class BotService {
             const getDBC = await this.districtRepository.findOne({where: {id:district}});
 
             const CountAppel = await this.appelRepository.findAll({where: {districtId: district, createdAt: {[Op.between] : [startedDate, endDate]}} , include: {all: true}, });
-            console.log(CountAppel)
             let monthforxl:string = 'Xatolik';
 
             if(month == 0){

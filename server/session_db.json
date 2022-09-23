@@ -54,9 +54,9 @@
       "id": "5632706056:5632706056",
       "data": {
         "__scenes": {},
-        "type": "sendYearAppel",
+        "type": "",
         "__language_code": "uz",
-        "whichAppelOrReception": "",
+        "whichAppelOrReception": "1",
         "district": "",
         "month": "",
         "year": ""

@@ -315,7 +315,6 @@ COPY public."Reception" (id, "chatId", passport, phone, description, "districtId
 --
 
 COPY public."TelegramMembers" (id, "chatId", name, phone, "districtId", lang, "createdAt", "updatedAt") FROM stdin;
-1	5632706056		+998331900809	0	uz	2022-09-23 01:02:57.043+05	2022-09-23 01:03:12.255+05
 \.
 
 
@@ -348,7 +347,7 @@ COPY public."Users" (id, phone, password, "chatId", role, "districtId", status, 
 4	+998937020111	123456	-4	Ijrochi	1	0	2022-09-13 21:28:37.163+05	2022-09-13 21:28:37.163+05
 5	+998974280102	123456	-5	Ijrochi	2	0	2022-09-13 21:28:37.163+05	2022-09-13 21:28:37.163+05
 6	+998909347474	123456	-6	Ijrochi	3	0	2022-09-13 21:28:37.163+05	2022-09-13 21:28:37.163+05
-1	+998949213838	123456	-1	Admin	0	0	2022-09-13 21:28:37.163+05	2022-09-13 21:28:37.163+05
+1	+998949213838	123456	-1	Admin	0	0	2022-09-13 21:28:37.163+05	2022-09-23 15:17:23.832+05
 \.
 
 
@@ -377,7 +376,7 @@ SELECT pg_catalog.setval('public."Reception_id_seq"', 1, false);
 -- Name: TelegramMembers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."TelegramMembers_id_seq"', 1, true);
+SELECT pg_catalog.setval('public."TelegramMembers_id_seq"', 1, false);
 
 
 --
