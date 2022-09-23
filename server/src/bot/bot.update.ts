@@ -1686,7 +1686,7 @@ export class BotUpdate {
 
             if (getDistrict) {
                 await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), 'https://www.google.com/'),
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/40.9035576,69.3475678/@40.9033521,69.3471125,166m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
