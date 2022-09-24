@@ -2491,8 +2491,12 @@ export class BotUpdate {
         }
 
         if (text == 'Hisobot') {
-            ctx.session.type = 'sendHisobot';
-            await ctx.replyWithHTML("Tanlang", setAppelOrReception());
+            const check = await this.botService.checkMibHumanByChatId(chatId);
+
+            if (check) {
+                ctx.session.type = 'sendHisobot';
+                await ctx.replyWithHTML("Tanlang", setAppelOrReception());
+            }
         }
 
         if(text.length == 13) {
@@ -2596,6 +2600,7 @@ export class BotUpdate {
                     await ctx.telegram.sendMessage(appel.directorChatId, content, {parse_mode: 'HTML'});
                     if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
                         await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                        await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }
 
@@ -2657,6 +2662,7 @@ export class BotUpdate {
                 if (reception.directorChatId > 0) {
                     await ctx.telegram.sendMessage(reception.directorChatId, content, {parse_mode: 'HTML'});
                     if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
+                        await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
                         await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }

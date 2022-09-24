@@ -68,6 +68,21 @@ export class BotService {
         }
     }
 
+    async checkMibHumanByChatId(chatId: number) {
+        
+        const user = await this.userRepository.findOne({where: {chatId: chatId}, include: {all: true}});
+
+        if (user) {
+            if(user.role == 'Admin' || user.role == 'Director') {
+                return user;
+            }
+        } else {
+            return null;
+        }
+
+    }
+
+
     async createTelegramMember(dto: createTelegramMember) {
         const chatId = dto.chatId;
         const condidate = await this.telegramMemberRepository.findOne({where: {chatId}, include: {all: true}});
