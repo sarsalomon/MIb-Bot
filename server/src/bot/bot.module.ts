@@ -17,8 +17,6 @@ import { ConfigModule } from '@nestjs/config';
 import { I18n } from '@grammyjs/i18n';
 import * as path from 'path';
 
-console.log(path.resolve(__dirname, '..', '..', '\src\\bot\\features\\locales'))
-
 const sessions = new LocalSession({database: 'session_db.json'});
 
 export const i18n = new I18n({
@@ -34,11 +32,11 @@ export const i18n = new I18n({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env'
-  }),
+    }),
     SequelizeModule.forFeature([TelegramMembers, Appel, District, Reception, User]),
-    TelegrafModule .forRoot({
+    TelegrafModule.forRoot({
       middlewares: [sessions.middleware(), i18n.middleware()],
-      token: process.env.TELEGRAM
+      token: process.env.TELEGRAM,
     }),
     AppelModule,
     ReceptionModule,

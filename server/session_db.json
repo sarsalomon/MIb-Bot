@@ -16,8 +16,8 @@
       "id": "476443896:476443896",
       "data": {
         "__scenes": {},
-        "type": "sendYearReception",
-        "__language_code": "uz",
+        "type": "SendReception",
+        "__language_code": "oz",
         "whichAppelOrReception": "",
         "district": "",
         "month": "",
@@ -28,7 +28,8 @@
       "id": "848711085:848711085",
       "data": {
         "__scenes": {},
-        "type": "SendReceptionPassport"
+        "type": "",
+        "__language_code": "ru"
       }
     },
     {
@@ -54,9 +55,9 @@
       "id": "5632706056:5632706056",
       "data": {
         "__scenes": {},
-        "type": "",
+        "type": "sendYearReception",
         "__language_code": "uz",
-        "whichAppelOrReception": "1",
+        "whichAppelOrReception": "",
         "district": "",
         "month": "",
         "year": ""
@@ -80,6 +81,21 @@
         "district": "",
         "month": "",
         "year": ""
+      }
+    },
+    {
+      "id": "424600810:424600810",
+      "data": {
+        "__scenes": {},
+        "type": "",
+        "__language_code": "oz"
+      }
+    },
+    {
+      "id": "866970096:866970096",
+      "data": {
+        "__scenes": {},
+        "__language_code": "ru"
       }
     }
   ]

@@ -29,41 +29,51 @@ export function actionButtons(ctx) {
     })
 }
 
-
 export function districtSendButtons(ctx) {
     return Markup.inlineKeyboard([
-        Markup.button.callback(`${ctx.i18n.t("AngrenCity")}`, 'AngrenSend'),
-        Markup.button.callback(`${ctx.i18n.t("BekobodCity")}`, 'BekobodSend'),
-        Markup.button.callback(`${ctx.i18n.t("Bekobod")}`, 'BekobodSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Buka")}`, 'BokaSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Bustonlik")}`, 'BostonlikSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Zangiota")}`, 'ZangiotaSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Qibray")}`, 'QibraySendT'),
-        Markup.button.callback(`${ctx.i18n.t("Chirchiq")}`, 'ChirchikSend'),
-        Markup.button.callback(`${ctx.i18n.t("Quyinchirchiq")}`, 'QuyichirchiqSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Urtachirchiq")}`, 'OrtachirchiqSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Yuqorichirchiq")}`, 'YuqorichirchiqSendT'),
-        Markup.button.callback(`${ctx.i18n.t("NurafshonCity")}`, 'NurafshonSend'),
-        Markup.button.callback(`${ctx.i18n.t("Oqqorgon")}`, 'OqqorgonSendT'),
-        Markup.button.callback(`${ctx.i18n.t("OlmaliqCity")}`, 'OlmaliqSend'),
-        Markup.button.callback(`${ctx.i18n.t("OhangaronCity")}`, 'OhangaronSend'),
-        Markup.button.callback(`${ctx.i18n.t("Ohangaron")}`, 'OhangaronSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Parkent")}`, 'ParkentSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Pskent")}`, 'PskentSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Toshkent")}`, 'ToshkentSendT'),
-        Markup.button.callback(`${ctx.i18n.t("Chinoz")}`, 'ChinozSendT'),
-        Markup.button.callback(`${ctx.i18n.t("YangiyulCity")}`, 'YangiyolSend'),
-        Markup.button.callback(`${ctx.i18n.t("Yangiyul")}`, 'YangiyolSendT'),
+        [Markup.button.callback(`${ctx.i18n.t("AngrenCity")}`, 'AngrenSend'),
+        Markup.button.callback(`${ctx.i18n.t("BekobodCity")}`, 'BekobodSend'),],
+        [Markup.button.callback(`${ctx.i18n.t("Bekobod")}`, 'BekobodSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Buka")}`, 'BokaSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Bustonlik")}`, 'BostonlikSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Zangiota")}`, 'ZangiotaSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Qibray")}`, 'QibraySendT'),
+        Markup.button.callback(`${ctx.i18n.t("Chirchiq")}`, 'ChirchikSend'),],
+        [Markup.button.callback(`${ctx.i18n.t("Quyinchirchiq")}`, 'QuyichirchiqSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Urtachirchiq")}`, 'OrtachirchiqSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Yuqorichirchiq")}`, 'YuqorichirchiqSendT'),
+        Markup.button.callback(`${ctx.i18n.t("NurafshonCity")}`, 'NurafshonSend'),],
+        [Markup.button.callback(`${ctx.i18n.t("Oqqorgon")}`, 'OqqorgonSendT'),
+        Markup.button.callback(`${ctx.i18n.t("OlmaliqCity")}`, 'OlmaliqSend'),],
+        [Markup.button.callback(`${ctx.i18n.t("OhangaronCity")}`, 'OhangaronSend'),
+        Markup.button.callback(`${ctx.i18n.t("Ohangaron")}`, 'OhangaronSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Parkent")}`, 'ParkentSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Pskent")}`, 'PskentSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Toshkent")}`, 'ToshkentSendT'),
+        Markup.button.callback(`${ctx.i18n.t("Chinoz")}`, 'ChinozSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("YangiyulCity")}`, 'YangiyolSend'),
+        Markup.button.callback(`${ctx.i18n.t("Yangiyul")}`, 'YangiyolSendT'),],
+        [Markup.button.callback(`${ctx.i18n.t("Head")}`, 'sendIT'),],
+        [Markup.button.callback(`${ctx.i18n.t("BackText")}`, 'BackToMain'),]
+    ])
+}
+
+export function BackToMain(ctx) {
+    return Markup.inlineKeyboard([
+        Markup.button.callback(`${ctx.i18n.t("errorCancel")}`, 'BackToMain'),
+    ])
+}
+
+export function Back(ctx) {
+    return Markup.inlineKeyboard([
         Markup.button.callback(`${ctx.i18n.t("BackText")}`, 'BackToMain'),
-    ], {
-        columns:2
-    })
+    ])
 }
 
 export function setAppelOrReception() {
     return Markup.inlineKeyboard([
         Markup.button.callback('Xabar', 'AppelSend'),
-        Markup.button.callback('Murojat', 'ReceptionSend'),
+        Markup.button.callback('Online Qabul', 'ReceptionSend'),
     ], {
         columns:2
     })

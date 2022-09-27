@@ -10,7 +10,7 @@ export class BotResolver {
 
     @Mutation(returns => createTelegramMember)
     findAll(which: number, district:string, month: number, year: number) {
-        return this.botService.getHisobat(which, district, month, year)
+        return this.botService.getHisobot(which, district, month, year)
     }
 
 

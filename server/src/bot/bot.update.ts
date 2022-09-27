@@ -1,8 +1,7 @@
 import { InjectBot, Start, Update, Action, On, Message, Ctx } from 'nestjs-telegraf';
-import * as path from "path"
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
-import { actionButtons, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
+import { actionButtons, Back, BackToMain, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
 import { Context } from './features/context.interface';
 
 @Update()
@@ -147,6 +146,8 @@ export class BotUpdate {
         await ctx.editMessageText(ctx.i18n.t('SetDistrict'), districtSendButtons(ctx));
     }
 
+    // Disctrict
+
     @Action('AngrenSend')
     async sendDistrictDivisions1(ctx: Context) {
         await ctx.answerCbQuery('');
@@ -188,7 +189,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -201,7 +202,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -278,7 +279,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -291,7 +292,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -367,7 +368,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -380,7 +381,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -456,7 +457,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -469,7 +470,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -545,7 +546,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -558,7 +559,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -634,7 +635,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -647,7 +648,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -723,7 +724,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -736,7 +737,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -812,7 +813,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -825,7 +826,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -901,7 +902,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -914,7 +915,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -990,7 +991,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1003,7 +1004,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1079,7 +1080,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1092,7 +1093,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1168,7 +1169,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1181,7 +1182,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1257,7 +1258,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1270,7 +1271,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1346,7 +1347,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1359,7 +1360,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1435,7 +1436,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1448,7 +1449,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1524,7 +1525,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1537,7 +1538,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1613,7 +1614,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1626,7 +1627,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1702,7 +1703,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1715,7 +1716,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1791,7 +1792,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1804,7 +1805,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1880,7 +1881,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1893,7 +1894,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1969,7 +1970,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -1982,7 +1983,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2058,7 +2059,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2071,7 +2072,7 @@ export class BotUpdate {
 
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
-                await ctx.editMessageText(ctx.i18n.t("passsportSendText"));
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
             } else {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2104,9 +2105,103 @@ export class BotUpdate {
 
         }
     }
+    
+    @Action('sendIT')
+    async sendDistrictDivisions23(ctx: Context) {
+        await ctx.answerCbQuery('');
+        if (ctx.session.type == '') {
+            const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
+
+            let LangName:string = getDistrict.nameUz;
+            let LangDescription:string = getDistrict.descriptionUz;
+            
+            if (ctx.session['__language_code'] == 'uz'){
+                LangName = getDistrict.nameUz;
+                LangDescription = getDistrict.descriptionUz;
+            } else if (ctx.session['__language_code'] == 'ru'){
+                LangName = getDistrict.nameRu;
+                LangDescription = getDistrict.descriptionRu;
+            } else if (ctx.session['__language_code'] == 'oz'){
+                LangName = getDistrict.nameOz;
+                LangDescription = getDistrict.descriptionOz;
+            } else if (ctx.session['__language_code'] == 'en'){
+                LangName = getDistrict.nameEn;
+                LangDescription = getDistrict.descriptionEn;
+            }
+
+            if (getDistrict) {
+                await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0733546,69.0247084/@41.0733638,69.0231761,511m/data=!3m1!1e3!4m2!4m1!3e0"),
+                    Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
+                ], {
+                    columns:2
+                }));
+            } else {
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
+            }
+        } else if (ctx.session.type == 'SendMessage') {
+            const chatId = ctx.update['callback_query'].from.id;
+            const command = ctx.update['callback_query'].data;
+
+            const update = await this.botService.setDistrict(chatId, command, 0);
+
+            if (update) {
+                ctx.session.type = 'SendPassport';
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
+            } else {
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
+            }
+
+        } else if (ctx.session.type == 'SendReception') {
+            const chatId = ctx.update['callback_query'].from.id;
+            const command = ctx.update['callback_query'].data;
+
+            const update = await this.botService.setDistrict(chatId, command, 1);
+
+            if (update) {
+                ctx.session.type = 'SendReceptionPassport';
+                await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
+            } else {
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
+            }
+
+        } else if (ctx.session.type == 'sendReceptionOrAppelHisobot') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearAppel';
+                ctx.session.district = '23';
+                await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
+            }
+
+        } else if (ctx.session.type == 'sendAppelOrReceptionHisobot') {
+            const command = ctx.update['callback_query'].data;
+
+            const getDistrict = await this.botService.getDisctrictByCommand(command);
+
+            if (getDistrict) {
+                ctx.session.type = 'sendYearReception';
+                ctx.session.district = '23';
+                await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
+            } else {
+                await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
+            }
+
+        }
+    }
+
+    // @Action('sendIT')
+    // async simpleSendITNumber(ctx: Context) {
+    //     await ctx.answerCbQuery('');
+    //     await ctx.editMessageText(ctx.i18n.t("HeadText"), Back(ctx));
+    // }
 
     @Action('Back')
-    async sendDistrictDivisions23(ctx: Context) {
+    async sendToBack(ctx: Context) {
         await ctx.answerCbQuery('');
         await ctx.editMessageText("Malu'mot olish uchun ro'yxatdan tuman yoki shaharni tanlang 👇🏻", districtSendButtons(ctx));
     }
@@ -2297,7 +2392,7 @@ export class BotUpdate {
             ctx.session.month = ''
             ctx.session.year = ''
 
-            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons(ctx));
+            await ctx.replyWithHTML("Hali Murojaat yoq 0️⃣", actionButtons(ctx));
         } else {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
@@ -2326,7 +2421,7 @@ export class BotUpdate {
             ctx.session.whichAppelOrReception = ''
             ctx.session.month = ''
             ctx.session.year = ''
-            await ctx.replyWithHTML("Hali murojat yoq 0️⃣", actionButtons(ctx));
+            await ctx.replyWithHTML("Hali Murojaat yoq 0️⃣", actionButtons(ctx));
         } else {
             ctx.session.district = ''
             ctx.session.whichAppelOrReception = ''
@@ -2335,6 +2430,7 @@ export class BotUpdate {
             await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
         }
     }
+
     //
 
     @Action('AppelSend')
@@ -2365,10 +2461,11 @@ export class BotUpdate {
 
     @Action('sendMessage')
     async sendAppel(ctx: Context) {
+        await ctx.answerCbQuery('');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
 
-        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
+        if (phoneCheck == null || phoneCheck.phone == '' || phoneCheck.phone == null) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
             return
@@ -2387,10 +2484,11 @@ export class BotUpdate {
 
     @Action('onlineAppeal')
     async sendReception(ctx: Context) {
+        await ctx.answerCbQuery('');
         const chatId: number = ctx.update['callback_query'].message.chat.id;
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
 
-        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
+        if (phoneCheck == null || phoneCheck.phone == '' || phoneCheck.phone == null) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
             return
@@ -2423,8 +2521,6 @@ export class BotUpdate {
             plusnumber = '+' + ctx.update['message'].contact.phone_number
         }
 
-        console.log(`old: ${text}`)
-        console.log(`new: ${plusnumber}`)
         if (ctx.session.type == '') {
     
             const users = await this.botService.checkMibHumans(plusnumber, chatId);
@@ -2459,11 +2555,11 @@ export class BotUpdate {
 
         } else if (ctx.session.type == 'SendPhoneReception') {
 
-            const appel = await this.botService.setPhoneReception(Number(chatId), plusnumber)
+            const reception = await this.botService.setPhoneReception(Number(chatId), plusnumber)
 
-            if (appel) {
+            if (reception) {
                 ctx.session.type = 'SendDescriptionReception';
-                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"));
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendTextReception"));
             } else {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2475,7 +2571,7 @@ export class BotUpdate {
     @On('text')
     async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
-        const text = ctx.update['message'].text;
+        let text = ctx.update['message'].text;
 
         const appel = text.split(' ')[0];
         const id = text.split(' ')[1];
@@ -2490,6 +2586,7 @@ export class BotUpdate {
             }
         }
 
+
         if (text == 'Hisobot') {
             const check = await this.botService.checkMibHumanByChatId(chatId);
 
@@ -2498,6 +2595,161 @@ export class BotUpdate {
                 await ctx.replyWithHTML("Tanlang", setAppelOrReception());
             }
         }
+
+
+        if (ctx.session.type == 'SendPassport' || ctx.session.type == 'SendReceptionPassport') {
+            if(text.length == 9 || text.length == 9 ) {
+
+                text = text.toUpperCase();
+
+                const oneLetter   = text[0];
+                const twoLetter   = text[1];
+                const threeLetter = text[2];
+                const fourLetter  = text[3];
+                const fiveLetter  = text[4];
+                const sixLetter   = text[5];
+                const sevenLetter = text[6];
+                const eightLetter = text[7];
+                const nineLetter  = text[8];
+
+                if ((oneLetter+twoLetter) == "AA" || (oneLetter+twoLetter) == "AB" || (oneLetter+twoLetter) == "AC" || (oneLetter+twoLetter) == "CK" || (oneLetter+twoLetter) == "CA" || (oneLetter+twoLetter) == "CB" || (oneLetter+twoLetter) == "CE" || (oneLetter+twoLetter) == "CC" || (oneLetter+twoLetter) == "BG" || (oneLetter+twoLetter) == "XS") {
+                    if(threeLetter == '0' || threeLetter == '1' || threeLetter == '2' || threeLetter == '3' || threeLetter == '4' || threeLetter == '5' || threeLetter == '6' || threeLetter == '7' || threeLetter == '8' || threeLetter == '9') {
+                        if(fourLetter == '0' || fourLetter == '1' || fourLetter == '2' || fourLetter == '3' || fourLetter == '4' || fourLetter == '5' || fourLetter == '6' || fourLetter == '7' || fourLetter == '8' || fourLetter == '9') {
+                            if(fiveLetter == '0' || fiveLetter == '1' || fiveLetter == '2' || fiveLetter == '3' || fiveLetter == '4' || fiveLetter == '5' || fiveLetter == '6' || fiveLetter == '7' || fiveLetter == '8' || fiveLetter == '9') {
+                                if(sixLetter == '0' || sixLetter == '1' || sixLetter == '2' || sixLetter == '3' || sixLetter == '4' || sixLetter == '5' || sixLetter == '6' || sixLetter == '7' || sixLetter == '8' || sixLetter == '9') {
+                                    if(sevenLetter == '0' || sevenLetter == '1' || sevenLetter == '2' || sevenLetter == '3' || sevenLetter == '4' || sevenLetter == '5' || sevenLetter == '6' || sevenLetter == '7' || sevenLetter == '8' || sevenLetter == '9') {
+                                        if(eightLetter == '0' || eightLetter == '1' || eightLetter == '2' || eightLetter == '3' || eightLetter == '4' || eightLetter == '5' || eightLetter == '6' || eightLetter == '7' || eightLetter == '8' || eightLetter == '9') {
+                                            if(nineLetter == '0' || nineLetter == '1' || nineLetter == '2' || nineLetter == '3' || nineLetter == '4' || nineLetter == '5' || nineLetter == '6' || nineLetter == '7' || nineLetter == '8' || nineLetter == '9') {
+                                                // console.log("ishlado")
+                                            } else {
+                                                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                return
+                                            }
+                                        } else {
+                                            await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                            return
+                                        }
+                                    } else {
+                                        await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                        return
+                                    }
+                                } else {
+                                    await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                    return
+                                }
+                            } else {
+                                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                return
+                            }
+                        } else {
+                            await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                            return
+                        }
+                    } else {
+                        await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                        return
+                    }
+                } else {
+                    await ctx.replyWithHTML(ctx.i18n.t("errorAB"));
+                    return
+                }
+
+            } else {
+                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                return null;
+            }
+        }
+
+        if (ctx.session.type == 'SendPhone' || ctx.session.type == 'SendPhoneReception') {
+            if(text.length == 13 || text.length == 13 ) {
+
+                const zeroLetter    = text[0];
+                const oneLetter     = text[1];
+                const twoLetter     = text[2];
+                const threeLetter   = text[3];
+                const fourLetter    = text[4];
+                const fiveLetter    = text[5];
+                const sixLetter     = text[6];
+                const sevenLetter   = text[7];
+                const eightLetter   = text[8];
+                const nineLetter    = text[9];
+                const tenLetter     = text[10];
+                const elevenLetter  = text[11];
+                const twelenLetter  = text[12];
+
+                if (zeroLetter == "+") {
+                    if(oneLetter == '0' || oneLetter == '1' || oneLetter == '2' || oneLetter == '3' || oneLetter == '4' || oneLetter == '5' || oneLetter == '6' || oneLetter == '7' || oneLetter == '8' || oneLetter == '9') {
+                        if(twoLetter == '0' || twoLetter == '1' || twoLetter == '2' || twoLetter == '3' || twoLetter == '4' || twoLetter == '5' || twoLetter == '6' || twoLetter == '7' || twoLetter == '8' || twoLetter == '9') {
+                            if(threeLetter == '0' || threeLetter == '1' || threeLetter == '2' || threeLetter == '3' || threeLetter == '4' || threeLetter == '5' || threeLetter == '6' || threeLetter == '7' || threeLetter == '8' || threeLetter == '9') {
+                                if(fourLetter == '0' || fourLetter == '1' || fourLetter == '2' || fourLetter == '3' || fourLetter == '4' || fourLetter == '5' || fourLetter == '6' || fourLetter == '7' || fourLetter == '8' || fourLetter == '9') {
+                                    if(fiveLetter == '0' || fiveLetter == '1' || fiveLetter == '2' || fiveLetter == '3' || fiveLetter == '4' || fiveLetter == '5' || fiveLetter == '6' || fiveLetter == '7' || fiveLetter == '8' || fiveLetter == '9') {
+                                        if(sixLetter == '0' || sixLetter == '1' || sixLetter == '2' || sixLetter == '3' || sixLetter == '4' || sixLetter == '5' || sixLetter == '6' || sixLetter == '7' || sixLetter == '8' || sixLetter == '9') {
+                                            if(sevenLetter == '0' || sevenLetter == '1' || sevenLetter == '2' || sevenLetter == '3' || sevenLetter == '4' || sevenLetter == '5' || sevenLetter == '6' || sevenLetter == '7' || sevenLetter == '8' || sevenLetter == '9') {
+                                                if(eightLetter == '0' || eightLetter == '1' || eightLetter == '2' || eightLetter == '3' || eightLetter == '4' || eightLetter == '5' || eightLetter == '6' || eightLetter == '7' || eightLetter == '8' || eightLetter == '9') {
+                                                    if(nineLetter == '0' || nineLetter == '1' || nineLetter == '2' || nineLetter == '3' || nineLetter == '4' || nineLetter == '5' || nineLetter == '6' || nineLetter == '7' || nineLetter == '8' || nineLetter == '9') {
+                                                        if(tenLetter == '0' || tenLetter == '1' || tenLetter == '2' || tenLetter == '3' || tenLetter == '4' || tenLetter == '5' || tenLetter == '6' || tenLetter == '7' || tenLetter == '8' || tenLetter == '9') {
+                                                            if(elevenLetter == '0' || elevenLetter == '1' || elevenLetter == '2' || elevenLetter == '3' || elevenLetter == '4' || elevenLetter == '5' || elevenLetter == '6' || elevenLetter == '7' || elevenLetter == '8' || elevenLetter == '9') {
+                                                                if(twelenLetter == '0' || twelenLetter == '1' || twelenLetter == '2' || twelenLetter == '3' || twelenLetter == '4' || twelenLetter == '5' || twelenLetter == '6' || twelenLetter == '7' || twelenLetter == '8' || twelenLetter == '9') {
+        
+                                                                } else {
+                                                                    await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                                    return
+                                                                }
+                                                            } else {
+                                                                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                                return
+                                                            }
+                                                        } else {
+                                                            await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                            return
+                                                        }
+                                                    } else {
+                                                        await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                        return
+                                                    }
+                                                } else {
+                                                    await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                    return
+                                                }
+                                            } else {
+                                                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                                return
+                                            }
+                                        } else {
+                                            await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                            return
+                                        }
+                                    } else {
+                                        await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                        return
+                                    }
+                                } else {
+                                    await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                    return
+                                }
+                            } else {
+                                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                                return
+                            }
+                        } else {
+                            await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                            return
+                        }
+                    } else {
+                        await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                        return
+                    }
+                } else {
+                    await ctx.replyWithHTML(ctx.i18n.t("errorPlus"));
+                    return
+                }
+
+            } else {
+                await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
+                return null;
+            }
+        }
+
 
         if(text.length == 13) {
 
@@ -2590,37 +2842,39 @@ export class BotUpdate {
             const appel = await this.botService.setDescription(Number(chatId), text);
             if (appel) {
 
-                const content = `Yangi Xabar keldi 👇🏻\n\nXabarni ID raqami: <b>${appel.id}</b>\nMurojatchining Passport raqmi: <b>${appel.passport}</b>\nMurojatchining telefon raqami: <b>${appel.phone}</b>\nMurojatchining xabari: <b>${appel.description}</b>\nMurojat qilingan vaqti: <b>${appel.date}</b>\n\nXabar <b>${appel.districtName}</b> ga <b>${appel.userPhone}</b> raqamiga yuborildi`;
+                const content = `Yangi Xabar keldi 👇🏻\n\nXabarni ID raqami: <b>${appel.id}</b>\nMurojaatchining Passport raqami: <b>${appel.passport}</b>\nMurojaatchining telefon raqami: <b>${appel.phone}</b>\nMurojaatchining xabari: <b>${appel.description}</b>\nMurojaat qilingan vaqti: <b>${appel.date}</b>\n\nXabar <b>${appel.districtName}</b> ga <b>${appel.userPhone}</b> raqamiga yuborildi`;
 
                 if (appel.userChatId > 0) {
                     await ctx.telegram.sendMessage(appel.userChatId, content, {parse_mode: 'HTML'});
                 }
 
-                if (appel.directorChatId > 0) {
-                    await ctx.telegram.sendMessage(appel.directorChatId, content, {parse_mode: 'HTML'});
-                    if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
-                        await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
-                        await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
-                    }
-                }
+                // if (appel.directorChatId > 0) {
+                //     await ctx.telegram.sendMessage(appel.directorChatId, content, {parse_mode: 'HTML'});
+                //     if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
+                //         await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
+                //         await ctx.telegram.sendMessage(appel.directorChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
+                //     }
+                // }
 
                 if (appel.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(appel.kansilyariyaChatId, content, {parse_mode: 'HTML'});
                     if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
-                        await ctx.telegram.sendMessage(appel.kansilyariyaChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                        await ctx.telegram.sendMessage(appel.kansilyariyaChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }
                 
                 if (appel.adminChatId > 0) {
                     await ctx.telegram.sendMessage(appel.adminChatId, content, {parse_mode: 'HTML'});
                     if (appel.userChatId < 0 || appel.userChatId ==0 || appel.userChatId == null || appel.userChatId == undefined){
-                        await ctx.telegram.sendMessage(appel.adminChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                        await ctx.telegram.sendMessage(appel.adminChatId, `<b>${appel.districtName}</b> <b>${appel.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }
+
                 ctx.session.type = 'Done';
-                await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
+                await ctx.replyWithHTML(ctx.i18n.t("successAppelText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             } else {
+                await ctx.replyWithHTML(ctx.i18n.t("errorText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2640,7 +2894,7 @@ export class BotUpdate {
 
             if (reception) {
                 ctx.session.type = 'SendDescriptionReception';
-                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"), Markup.removeKeyboard());
+                await ctx.replyWithHTML(ctx.i18n.t("descriptionSendTextReception"), Markup.removeKeyboard());
             } else {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2650,38 +2904,38 @@ export class BotUpdate {
             const reception = await this.botService.setDescriptionReception(Number(chatId), text); 
 
             if (reception) {
-                ctx.session.type = 'DoneReception';
-                await ctx.replyWithHTML(ctx.i18n.t("successAppelOrReceptionText"));
-                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
-                const content = `Yangi Online qabulga so'rov keldi 👇🏻\n\nOnline qabul ID raqami: <b>${reception.id}</b>\nMurojatchining Passport raqmi: <b>${reception.passport}</b>\nMurojatchining telefon raqami: <b>${reception.phone}</b>\nMurojatchining xabari: <b>${reception.description}</b>\nMurojat qilingan vaqti: <b>${reception.date}</b>\n\nOnline qabul <b>${reception.districtName}</b> ga <b>${reception.userPhone}</b> raqamiga yuborildi`;
+
+                const content = `Yangi Online qabulga so'rov keldi 👇🏻\n\nOnline qabul ID raqami: <b>${reception.id}</b>\nMurojaatchining Passport raqami: <b>${reception.passport}</b>\nMurojaatchining telefon raqami: <b>${reception.phone}</b>\nMurojaatchining xabari: <b>${reception.description}</b>\nMurojaat qilingan vaqti: <b>${reception.date}</b>\n\nOnline qabul <b>${reception.districtName}</b> ga <b>${reception.userPhone}</b> raqamiga yuborildi`;
 
                 if (reception.userChatId > 0) {
                     await ctx.telegram.sendMessage(reception.userChatId, content, {parse_mode: 'HTML'});
                 }
 
-                if (reception.directorChatId > 0) {
-                    await ctx.telegram.sendMessage(reception.directorChatId, content, {parse_mode: 'HTML'});
-                    if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
-                        await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
-                        await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
-                    }
-                }
+                // if (reception.directorChatId > 0) {
+                //     await ctx.telegram.sendMessage(reception.directorChatId, content, {parse_mode: 'HTML'});
+                //     if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
+                //         await ctx.telegram.sendMessage(reception.directorChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
+                //     }
+                // }
 
                 if (reception.kansilyariyaChatId > 0) {
                     await ctx.telegram.sendMessage(reception.kansilyariyaChatId, content, {parse_mode: 'HTML'});
                     if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
-                        await ctx.telegram.sendMessage(reception.kansilyariyaChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                        await ctx.telegram.sendMessage(reception.kansilyariyaChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }
                 
                 if (reception.adminChatId > 0) {
                     await ctx.telegram.sendMessage(reception.adminChatId, content, {parse_mode: 'HTML'});
                     if (reception.userChatId < 0 || reception.userChatId ==0 || reception.userChatId == null || reception.userChatId == undefined){
-                        await ctx.telegram.sendMessage(reception.adminChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimnni ishga tushurmadi`, {parse_mode: 'HTML'});
+                        await ctx.telegram.sendMessage(reception.adminChatId, `<b>${reception.districtName}</b> <b>${reception.userPhone} raqamli</b> Ijrochi hali tizimni ishga tushurmadi`, {parse_mode: 'HTML'});
                     }
                 }
-
+                ctx.session.type = 'DoneReception';
+                await ctx.replyWithHTML(ctx.i18n.t("successReceptionText"));
+                await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             } else {
+                await ctx.replyWithHTML(ctx.i18n.t("errorText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
