@@ -51,8 +51,7 @@ export class BotUpdate {
             } else {
                 await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
             }
-        } else {
-            
+        } else if (!user.phone || user.phone == null || user.phone == undefined) {
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
     }
@@ -71,7 +70,7 @@ export class BotUpdate {
             } else {
                 await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
             }
-        } else {
+        } else if (!user.phone || user.phone == null || user.phone == undefined) {
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
     }
@@ -90,7 +89,8 @@ export class BotUpdate {
             } else {
                 await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
             }
-        } else {
+        } else if (!user.phone || user.phone == null || user.phone == undefined) {
+
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
     }
@@ -109,7 +109,7 @@ export class BotUpdate {
             } else {
                 await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
             }
-        } else {
+        } else if (!user.phone || user.phone == null || user.phone == undefined) {
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
     }
@@ -121,7 +121,7 @@ export class BotUpdate {
         const condidate = await this.botService.createTelegramMember({chatId: chatId, name: '', phone: '', districtId: 0, lang: ''});
         await ctx.answerCbQuery('');
 
-        if (!condidate) {
+        if (!condidate || condidate == null || condidate == undefined) {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
         } else {
             await ctx.editMessageText("Tilni tanlang \nВыборы язык \nтил танла \nChoose lang", langButtons());
@@ -138,7 +138,7 @@ export class BotUpdate {
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
         await ctx.answerCbQuery('');
 
-        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
+        if (phoneCheck.phone == '' || phoneCheck.phone == null || phoneCheck.phone == undefined) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
             return
@@ -178,7 +178,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -190,7 +190,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -203,7 +203,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -216,7 +216,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '1';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -229,7 +229,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '1';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -242,7 +242,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -268,7 +267,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -280,7 +279,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -293,7 +292,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -306,7 +305,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '2';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -319,7 +318,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '2';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -331,7 +330,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -357,7 +355,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -369,7 +367,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -382,7 +380,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -395,7 +393,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '3';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -408,7 +406,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '3';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -420,7 +418,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -446,7 +443,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -458,7 +455,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -471,7 +468,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -484,7 +481,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '4';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -497,7 +494,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '4';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -509,7 +506,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -535,7 +531,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -547,7 +543,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -560,7 +556,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -573,7 +569,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '5';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -586,7 +582,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '5';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -599,7 +595,6 @@ export class BotUpdate {
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
-
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
             
@@ -624,7 +619,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -636,7 +631,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -649,7 +644,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -662,7 +657,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '6';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -675,7 +670,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '6';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -688,7 +683,6 @@ export class BotUpdate {
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
 
-
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
             
@@ -713,7 +707,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -725,7 +719,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -738,7 +732,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -751,7 +745,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '7';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -764,7 +758,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '7';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -776,7 +770,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -802,7 +795,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -814,7 +807,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -827,7 +820,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -840,7 +833,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '8';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -853,7 +846,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '8';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -865,7 +858,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -891,7 +883,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -903,7 +895,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -916,7 +908,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -929,7 +921,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '9';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -942,7 +934,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '9';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -954,7 +946,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -980,7 +971,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -992,7 +983,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1005,7 +996,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1018,7 +1009,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '10';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1031,7 +1022,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '10';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1043,7 +1034,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -1069,7 +1059,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1081,7 +1071,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1094,7 +1084,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1107,7 +1097,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '11';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1120,7 +1110,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '11';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1158,7 +1148,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1170,7 +1160,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1183,7 +1173,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1196,7 +1186,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '12';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1209,7 +1199,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '12';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1247,7 +1237,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1259,7 +1249,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1272,7 +1262,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1285,7 +1275,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '13';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1298,7 +1288,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '13';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1336,7 +1326,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1348,7 +1338,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1361,7 +1351,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1374,7 +1364,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '14';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1387,7 +1377,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '14';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1425,7 +1415,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1437,7 +1427,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1450,7 +1440,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1463,7 +1453,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '15';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1476,7 +1466,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '15';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1514,7 +1504,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1526,7 +1516,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1539,7 +1529,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1552,7 +1542,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '16';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1565,7 +1555,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '16';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1603,7 +1593,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1615,7 +1605,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1628,7 +1618,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1641,7 +1631,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '17';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1654,7 +1644,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '17';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1666,7 +1656,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -1692,7 +1681,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1704,7 +1693,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1717,7 +1706,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1730,7 +1719,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '18';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1743,7 +1732,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '18';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1755,7 +1744,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -1781,7 +1769,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1793,7 +1781,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1806,7 +1794,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1819,7 +1807,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '19';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1832,7 +1820,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '19';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1844,7 +1832,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -1870,7 +1857,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1882,7 +1869,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1895,7 +1882,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1908,7 +1895,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '20';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1921,7 +1908,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '20';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1933,7 +1920,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -1959,7 +1945,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -1971,7 +1957,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1984,7 +1970,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -1997,7 +1983,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '21';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2010,7 +1996,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '21';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2022,7 +2008,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if (ctx.session.type == '') {
             const getDistrict = await this.botService.getDisctrictByCommand(ctx.update['callback_query'].data);
-
 
             let LangName:string = getDistrict.nameUz;
             let LangDescription:string = getDistrict.descriptionUz;
@@ -2048,7 +2033,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -2060,7 +2045,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2073,7 +2058,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2086,7 +2071,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '22';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2099,7 +2084,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '22';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2136,7 +2121,7 @@ export class BotUpdate {
                 ], {
                     columns:2
                 }));
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
         } else if (ctx.session.type == 'SendMessage') {
@@ -2148,7 +2133,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2161,7 +2146,7 @@ export class BotUpdate {
             if (update) {
                 ctx.session.type = 'SendReceptionPassport';
                 await ctx.editMessageText(ctx.i18n.t("passsportSendText"), BackToMain(ctx));
-            } else {
+            } else if (!update || update == null || update == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2174,7 +2159,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearAppel';
                 ctx.session.district = '23';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2187,7 +2172,7 @@ export class BotUpdate {
                 ctx.session.type = 'sendYearReception';
                 ctx.session.district = '23';
                 await ctx.editMessageText("Tanlang", setWhenTodayOrMonths());
-            } else {
+            } else if (!getDistrict || getDistrict == null || getDistrict == undefined) {
                 await ctx.editMessageText(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2214,7 +2199,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2226,7 +2210,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2239,7 +2222,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2251,7 +2233,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2263,7 +2244,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2275,7 +2255,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2287,7 +2266,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2299,7 +2277,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2311,7 +2288,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2323,7 +2299,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2335,7 +2310,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2347,7 +2321,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2359,7 +2332,6 @@ export class BotUpdate {
         await ctx.answerCbQuery('');
         if(ctx.session.whichAppelOrReception == "1") {
             await ctx.editMessageText("Yilni tanlang", setWhenYear());
-
         } else if (ctx.session.whichAppelOrReception == '2') {
             await ctx.editMessageText("Yilni tanlang", setWhenYearReception());
         }
@@ -2470,7 +2442,7 @@ export class BotUpdate {
             ctx.session.type = 'SendMessage';
             await ctx.answerCbQuery('');
             await ctx.editMessageText(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
-        } else {
+        } else if (!appel || appel == null || appel == undefined) {
             await ctx.answerCbQuery('');
             await ctx.replyWithHTML(ctx.i18n.t("AppelProgress"), Markup.removeKeyboard());
         }
@@ -2493,7 +2465,7 @@ export class BotUpdate {
             ctx.session.type = 'SendReception';
             await ctx.answerCbQuery('');
             await ctx.editMessageText(ctx.i18n.t("chooseCityOrDistrict"), districtSendButtons(ctx));
-        } else {
+        } else if (!reception || reception == null || reception == undefined) {
             await ctx.answerCbQuery('');
             await ctx.replyWithHTML(ctx.i18n.t("ReceptionProgress"), Markup.removeKeyboard());
         }
@@ -2543,7 +2515,7 @@ export class BotUpdate {
             if (appel) {
                 ctx.session.type = 'SendDescription';
                 await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"));
-            } else {
+            } else if (!appel || appel == null || appel == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2554,7 +2526,7 @@ export class BotUpdate {
             if (reception) {
                 ctx.session.type = 'SendDescriptionReception';
                 await ctx.replyWithHTML(ctx.i18n.t("descriptionSendTextReception"));
-            } else {
+            } else if (!reception || reception == null || reception == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2566,6 +2538,15 @@ export class BotUpdate {
     async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
         const chatId = ctx.update['message'].chat.id;
         let text = ctx.update['message'].text;
+
+        if (text == 'Hisobot') {
+            console.log("Hisobot")
+            const check = await this.botService.checkMibHumanByChatId(chatId);
+            if (check) {
+                ctx.session.type = 'sendHisobot';
+                await ctx.replyWithHTML("Tanlang", setAppelOrReception());
+            }
+        }
 
         const appel = text.split(' ')[0];
         const id = text.split(' ')[1];
@@ -2579,17 +2560,6 @@ export class BotUpdate {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"));
             }
         }
-
-
-        if (text == 'Hisobot') {
-            const check = await this.botService.checkMibHumanByChatId(chatId);
-
-            if (check) {
-                ctx.session.type = 'sendHisobot';
-                await ctx.replyWithHTML("Tanlang", setAppelOrReception());
-            }
-        }
-
 
         if (ctx.session.type == 'SendPassport' || ctx.session.type == 'SendReceptionPassport') {
             if(text.length == 9 || text.length == 9 ) {
@@ -2737,7 +2707,6 @@ export class BotUpdate {
                     await ctx.replyWithHTML(ctx.i18n.t("errorPlus"));
                     return
                 }
-
             } else {
                 await ctx.replyWithHTML(ctx.i18n.t("errorLength"));
                 return null;
@@ -2763,7 +2732,7 @@ export class BotUpdate {
                         } else {
                             plusnumber = '+' + ctx.update['message'].contact.phone_number
                         }
-                
+
                         const users = await this.botService.checkMibHumans(plusnumber, chatId);
                 
                         if (users) {
@@ -2793,7 +2762,7 @@ export class BotUpdate {
 
         const phoneCheck = await this.botService.getTelegramMemberByID(chatId);
 
-        if (phoneCheck.phone == '' || phoneCheck.phone == null) {
+        if (phoneCheck.phone == '' || phoneCheck.phone == null || phoneCheck.phone == undefined) {
             await ctx.replyWithHTML(ctx.i18n.t("errphoneRegText"));
             await ctx.replyWithHTML(ctx.i18n.t("phoneRegText"), sendPhone(ctx));
         }
@@ -2806,7 +2775,7 @@ export class BotUpdate {
             if (appel) {
                 ctx.session.type = 'SendPassport';
                 await ctx.replyWithHTML(ctx.i18n.t("passsportSendText"));
-            } else {
+            } else if (!appel || appel == null || appel == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
@@ -2816,7 +2785,7 @@ export class BotUpdate {
             if (appel) {
                 ctx.session.type = 'SendPhone';
                 await ctx.replyWithHTML(ctx.i18n.t("phoneSendText"), sendPhone(ctx));
-            } else {
+            } else if (!appel || appel == null || appel == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
@@ -2827,7 +2796,7 @@ export class BotUpdate {
             if (appel) {
                 ctx.session.type = 'SendDescription';
                 await ctx.replyWithHTML(ctx.i18n.t("descriptionSendText"), Markup.removeKeyboard());
-            } else {
+            } else if (!appel || appel == null || appel == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2867,7 +2836,7 @@ export class BotUpdate {
                 ctx.session.type = 'Done';
                 await ctx.replyWithHTML(ctx.i18n.t("successAppelText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
-            } else {
+            } else if (!appel || appel == null || appel == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("errorText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
@@ -2878,7 +2847,7 @@ export class BotUpdate {
             if (reception) {
                 ctx.session.type = 'SendPhoneReception';
                 await ctx.replyWithHTML(ctx.i18n.t("phoneSendText"), sendPhone(ctx));
-            } else {
+            } else if (!reception || reception == null || reception == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
            
@@ -2889,7 +2858,7 @@ export class BotUpdate {
             if (reception) {
                 ctx.session.type = 'SendDescriptionReception';
                 await ctx.replyWithHTML(ctx.i18n.t("descriptionSendTextReception"), Markup.removeKeyboard());
-            } else {
+            } else if (!reception || reception == null || reception == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
 
@@ -2928,7 +2897,7 @@ export class BotUpdate {
                 ctx.session.type = 'DoneReception';
                 await ctx.replyWithHTML(ctx.i18n.t("successReceptionText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
-            } else {
+            } else if (!reception || reception == null || reception == undefined) {
                 await ctx.replyWithHTML(ctx.i18n.t("errorText"));
                 await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
             }
