@@ -20,7 +20,7 @@ import * as path from 'path';
 const sessions = new LocalSession({database: 'session_db.json'});
 
 export const i18n = new I18n({
-	directory: path.resolve(__dirname, '..', '..', '\src\\bot\\features\\locales'),
+	directory: path.resolve(__dirname, '..', '..', 'src/bot/features/locales'),
 	defaultLanguage: 'uz',
 	sessionName: 'session',
 	useSession: true,
