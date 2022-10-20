@@ -73,7 +73,7 @@ export class BotService {
         const user = await this.userRepository.findOne({where: {chatId: chatId}, include: {all: true}});
 
         if (user) {
-            if(user.role == 'Admin' || user.role == 'Director') {
+            if(user.role == 'Admin' || user.role == 'Director' || user.role == 'Programmer') {
                 return user;
             }
         } else {

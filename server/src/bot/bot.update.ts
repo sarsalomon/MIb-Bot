@@ -2130,8 +2130,8 @@ export class BotUpdate {
             }
 
             if (getDistrict) {
-                await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([
-                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0733546,69.0247084/@41.0733638,69.0231761,511m/data=!3m1!1e3!4m2!4m1!3e0"),
+                await ctx.editMessageText(`${LangName}\n${LangDescription}`, Markup.inlineKeyboard([                    
+                    Markup.button.url(ctx.i18n.t("LocationSendText"), "https://www.google.com/maps/dir/''/41.0253911,69.3347599/@41.0253911,69.33475991,511m/data=!3m1!1e3!4m2!4m1!3e0"),
                     Markup.button.callback(ctx.i18n.t("BackText"), 'Back'),
                 ], {
                     columns:2
@@ -2193,12 +2193,6 @@ export class BotUpdate {
 
         }
     }
-
-    // @Action('sendIT')
-    // async simpleSendITNumber(ctx: Context) {
-    //     await ctx.answerCbQuery('');
-    //     await ctx.editMessageText(ctx.i18n.t("HeadText"), Back(ctx));
-    // }
 
     @Action('Back')
     async sendToBack(ctx: Context) {
