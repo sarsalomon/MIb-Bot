@@ -10,7 +10,6 @@ import { Op } from 'sequelize';
 import * as excelJS from "exceljs";
 import * as path from "path"
 import * as fs from 'fs';
-import * as uuid from 'uuid';
 
 @Injectable()
 export class BotService {
@@ -63,7 +62,7 @@ export class BotService {
                 const updatePhone = await this.telegramMemberRepository.update({phone: text}, {where: {chatId: chatId}});
                 return updateChatId;
             }
-        } else {
+        } else if(!user || user == null || user == undefined) {
             return null;
         }
     }
@@ -76,7 +75,7 @@ export class BotService {
             if(user.role == 'Admin' || user.role == 'Director' || user.role == 'Programmer') {
                 return user;
             }
-        } else {
+        } else if(!user || user == null || user == undefined) {
             return null;
         }
 
@@ -89,7 +88,7 @@ export class BotService {
 
         if (condidate) {
             return condidate;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             const telegramMember = await this.telegramMemberRepository.create(dto);
             return telegramMember;
         }
@@ -107,7 +106,7 @@ export class BotService {
 
         if (district) {
             return district;
-        } else {
+        } else if(!district || district == null || district == undefined) {
             return null;
         }
 
@@ -119,7 +118,7 @@ export class BotService {
         if (condidate) {
             const setLang = await this.telegramMemberRepository.update({lang: lang}, {where: {chatId}});
             return setLang;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
     }
@@ -132,7 +131,7 @@ export class BotService {
         if (condidate) {
             const setLang = await this.telegramMemberRepository.update({phone: phone}, {where: {chatId}});
             return setLang;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
     }
@@ -149,14 +148,14 @@ export class BotService {
 
                 if (condidateDelete){
                     return condidateDelete;
-                } else {
+                } else if(!condidateDelete || condidateDelete == null || condidateDelete == undefined) {
                     return null;                
                 }
             } else {
                 return null;        
             }
 
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             const appel = await this.appelRepository.create({chatId: chatId, passport: '', phone: '', description: '', districtId: 0, status: 0});
             return appel;
         }
@@ -171,7 +170,7 @@ export class BotService {
             if (condidate) {
                 const updateDistrict = await this.appelRepository.update({districtId: condidate.id}, {where: {chatId,  status: 0}});
                 return updateDistrict;
-            } else {
+            } else if(!condidate || condidate == null || condidate == undefined) {
                 return null;
             }
         } else if (which == 1) {
@@ -180,7 +179,7 @@ export class BotService {
             if (condidate) {
                 const updateDistrict = await this.receptionRepository.update({districtId: condidate.id}, {where: {chatId,  status: 0}});
                 return updateDistrict;
-            } else {
+            } else if(!condidate || condidate == null || condidate == undefined) {
                 return null;
             }
         } else {
@@ -196,7 +195,7 @@ export class BotService {
         if (condidate) {
             const setpassport = await this.appelRepository.update({passport: passport}, {where: {chatId,  status: 0}});
             return setpassport;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -209,7 +208,7 @@ export class BotService {
         if (condidate) {
             const setphone = await this.appelRepository.update({phone: phone}, {where: {chatId,  status: 0}});
             return setphone;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -256,17 +255,17 @@ export class BotService {
                             date: Date
                         }
                         return obj;
-                    } else {
+                    } else if(!findUser || findUser == null || findUser == undefined) {
                         return null;
                     }
-                } else {
-
+                } else if(!findeAppel || findeAppel == null || findeAppel == undefined) {
+                    return null;
                 }
-            } else {
+            } else if(!setdescription || setdescription == null || setdescription == undefined) {
                 return null;
             }
 
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -283,14 +282,14 @@ export class BotService {
                 const condidateDelete = await this.receptionRepository.destroy({where: {id: condidate.id}});
                 if (condidateDelete){
                     return condidateDelete;
-                } else {
+                } else if(!condidateDelete || condidateDelete == null || condidateDelete == undefined) {
                     return null;                
                 }
             } else {
                 return null;                
             }
             // throw new HttpException('Xatolik', HttpStatus.BAD_REQUEST);
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             const reception = await this.receptionRepository.create({chatId: chatId, passport: '', phone: '', description: '', districtId: 0, status: 0});
             return reception;
         }
@@ -305,7 +304,7 @@ export class BotService {
         if (condidate) {
             const setpassport = await this.receptionRepository.update({passport: passport}, {where: {chatId,  status: 0}});
             return setpassport;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -318,7 +317,7 @@ export class BotService {
         if (condidate) {
             const setphone = await this.receptionRepository.update({phone: phone}, {where: {chatId,  status: 0}});
             return setphone;
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -365,16 +364,16 @@ export class BotService {
                             date: Date
                         }
                         return obj;
-                    } else {
+                    } else if(!findUser || findUser == null || findUser == undefined) {
                         return null;
                     }
-                } else {
+                } else if(!findeReception || findeReception == null || findeReception == undefined) {
                     return null;
                 }
-            } else {
+            } else if(!setdescription || setdescription == null || setdescription == undefined) {
                 return null;
             }
-        } else {
+        } else if(!condidate || condidate == null || condidate == undefined) {
             return null;
         }
 
@@ -457,10 +456,19 @@ export class BotService {
             const exportPath = path.resolve(filePath, `Xabar ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
                 
             await workbook.xlsx.writeFile(exportPath);
+                
+            let obj = {}
 
-            const obj = {
-                count: CountAppel.length,
-                SendFilePath: exportPath,
+            if (CountAppel.length >=0) {
+                obj = {
+                    count: CountAppel.length,
+                    SendFilePath: exportPath,
+                }
+            } else if (!CountAppel || CountAppel == null || CountAppel == undefined) {
+                obj = {
+                    count: 0,
+                    SendFilePath: exportPath,
+                }
             }
 
             return obj;
@@ -522,9 +530,18 @@ export class BotService {
             const exportPath = path.resolve(filePath, `Online murojat ${day}-${newmonth}-${year}-${getDBC.nameUz}-${monthforxl}.xlsx`);
             await workbook.xlsx.writeFile(exportPath);
 
-            const obj = {
-                count: CountReception.length,
-                SendFilePath: exportPath,
+            let obj = {}
+
+            if (CountReception.length >=0) {
+                obj = {
+                    count: CountReception.length || 0,
+                    SendFilePath: exportPath,
+                }
+            } else if (!CountReception || CountReception == null || CountReception == undefined) {
+                obj = {
+                    count: 0,
+                    SendFilePath: exportPath,
+                }
             }
 
             return obj;

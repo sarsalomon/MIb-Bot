@@ -1,14 +1,16 @@
 import { InjectBot, Start, Update, Action, On, Message, Ctx } from 'nestjs-telegraf';
 import { Markup, Telegraf } from 'telegraf';
 import { BotService } from './bot.service';
-import { actionButtons, Back, BackToMain, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
+import { actionButtons, BackToMain, districtSendButtons, langButtons, sendPhone, setAppelOrReception, setWhenTodayOrMonths, setWhenYear, setWhenYearReception } from './features/app.buttons';
 import { Context } from './features/context.interface';
 
 @Update()
 export class BotUpdate {
+    
     static SendMessageToMibHumas() {
         throw new Error('Method not implemented.');
     }
+
     constructor(
         @InjectBot() private readonly bot: Telegraf<Context>,
         private readonly botService: BotService
@@ -2540,7 +2542,6 @@ export class BotUpdate {
         let text = ctx.update['message'].text;
 
         if (text == 'Hisobot') {
-            console.log("Hisobot")
             const check = await this.botService.checkMibHumanByChatId(chatId);
             if (check) {
                 ctx.session.type = 'sendHisobot';
@@ -2713,7 +2714,6 @@ export class BotUpdate {
             }
         }
 
-
         if(text.length == 13) {
 
             if (ctx.session.type != 'SendPhone') {
@@ -2746,7 +2746,7 @@ export class BotUpdate {
                                 let sendRegMsg = await ctx.reply(ctx.i18n.t("registrationSuccessText"), Markup.removeKeyboard());
                                 if (sendRegMsg) {
                                     await ctx.replyWithHTML(ctx.i18n.t("serviceText"), actionButtons(ctx));
-                                } else {
+                                } else if (!condidate || condidate == null || condidate == undefined) {
                                     await ctx.replyWithHTML(ctx.i18n.t("errorText"));
                                 }
                             } else {
